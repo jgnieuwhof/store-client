@@ -1,10 +1,12 @@
 import React from 'react'
 import Helmet from "react-helmet"
 
+import favicon from 'img/favicon.ico'
+
 let Site = ({ children }) => {
   let faviconConfig = [{
     rel: "icon",
-    href: require('../img/favicon.ico'),
+    href: favicon,
     type: "img/ico",
   }]
 
