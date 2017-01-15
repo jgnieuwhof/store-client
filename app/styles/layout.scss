@@ -74,13 +74,19 @@ $base-spacing: 30px;
 // Store
 // ============================================================================
 
-.store-items-container {
-  .thumbnail {
-    display: flex;
-    justify-content: center;
-    img {
-      width: 260px;
-      height: 260px;
+.store-container {
+  .container {
+    padding: 0;
+  }
+
+  .store-items {
+    .thumbnail {
+      display: flex;
+      justify-content: center;
+      img {
+        width: 270px;
+        height: 270px;
+      }
     }
   }
 }
