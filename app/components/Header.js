@@ -3,11 +3,12 @@ import React from 'react'
 import {
   Navbar,
   Nav,
-  NavItem,
   NavDropdown,
   MenuItem,
 } from 'react-bootstrap'
 import { Link } from 'react-router'
+
+import NavItem from 'components/NavItem'
 
 let Header = () => {
   return (
@@ -21,12 +22,8 @@ let Header = () => {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1}>
-              <Link to="/store">Store</Link>
-            </NavItem>
-            <NavItem eventKey={2}>
-              <Link to="/about">About</Link>
-            </NavItem>
+            <NavItem eventKey={1} href="/store">Store</NavItem>
+            <NavItem eventKey={2} href="/about">About</NavItem>
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1}>Action</MenuItem>
               <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -36,7 +33,7 @@ let Header = () => {
             </NavDropdown>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={1} href="#">Link Right</NavItem>
+            <NavItem eventKey={1}>Cart Info Here</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
