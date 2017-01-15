@@ -47,6 +47,7 @@ module.exports = {
        constants: 'app/constants',
        helpers: 'app/helpers',
        reducers: 'app/reducers',
+       img: 'app/img',
      },
      extensions: ['', '.js', '.scss'],
   }
