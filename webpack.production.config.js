@@ -18,7 +18,6 @@ module.exports = {
       inject: false,
     }),
     new webpack.DefinePlugin({
-      API_URL: process.env.API_URL,
       'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) }
     })
   ],
