@@ -1,0 +1,47 @@
+
+$min-viewport-height: 850px;
+
+html,
+body {
+  height: 100%;
+  background: #FFF;
+  user-select: none;
+}
+
+// ============================================================================
+// Bootstrap
+// ============================================================================
+
+.container {
+  transition: width 0.125s, padding 0.125s;
+}
+.container-maximize {
+  width: auto;
+  padding: 0;
+}
+.container-safari-fix {
+  transition: none;
+}
+
+// ============================================================================
+// Header
+// ============================================================================
+
+.header-container {
+  * {
+    color: $brand-primary !important;
+  }
+}
+
+// ============================================================================
+// Splash Page
+// ============================================================================
+
+.splash-container {
+  position: absolute;
+  top: 0; bottom: 0; right: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
