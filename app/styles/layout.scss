@@ -11,10 +11,6 @@ body {
 // ============================================================================
 // Bootstrap
 // ============================================================================
-
-.container {
-  transition: width 0.125s, padding 0.125s;
-}
 .container-maximize {
   width: auto;
   padding: 0;
@@ -24,19 +20,74 @@ body {
 }
 
 // ============================================================================
-// Header
+// Animations
+// ============================================================================
+.body {
+  > * {
+    animation: fadein 0.5s;
+  }
+}
+
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+
+// ============================================================================
+// Layout
+// ============================================================================
+$footer-height: 75px;
+$base-spacing: 30px;
+
+.body {
+  margin-bottom: $base-spacing;
+}
+
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: $footer-height;
+}
+
+.footer-container {
+  position: absolute;
+  left: 0px; bottom: 0px;
+  width: 100%;
+  height: $footer-height;
+  padding: $base-spacing;
+  background-color: #f8f8f8;
+  color: $gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-buffer {
+  margin-top: $base-spacing;
+}
+
+// ============================================================================
+// Store
 // ============================================================================
 
-.header-container {
-  * {
-    color: $brand-primary !important;
+.store-items-container {
+  .thumbnail {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 260px;
+      height: 260px;
+    }
   }
 }
 
 // ============================================================================
 // Splash Page
 // ============================================================================
-
 .splash-container {
   position: absolute;
   top: 0; bottom: 0; right: 0; left: 0;
@@ -44,4 +95,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+// ============================================================================
+// Header
+// ============================================================================
+.header-container {
+  * {
+    color: $brand-primary !important;
+  }
 }
