@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 let Splash = () => {
   return (
-    <div className="splash-container">
+    <div className="splash-container full-size center-content">
       <Grid className="text-center">
         <h2>Welcome to the Store!</h2>
         <Link to="/store" className="btn btn-lg btn-primary">

@@ -17,7 +17,8 @@ $fa-font-path: "./../node_modules/font-awesome/fonts";
 // Reset and dependencies
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_normalize.scss";
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_print.scss";
-//@import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_glyphicons.scss";
+$icon-font-path: "./../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
+@import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_glyphicons.scss";
 
 // Core CSS
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_type.scss";
@@ -52,7 +53,7 @@ $fa-font-path: "./../node_modules/font-awesome/fonts";
 //@import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_wells.scss";
 
 // Components w/ JavaScript
-//@import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_modals.scss";
+@import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_modals.scss";
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_tooltip.scss";
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_popovers.scss";
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_carousel.scss";
