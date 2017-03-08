@@ -48,6 +48,7 @@ module.exports = {
        helpers: 'app/helpers',
        reducers: 'app/reducers',
        img: 'app/img',
+       util: 'app/util',
      },
      extensions: ['', '.js', '.scss'],
   },
