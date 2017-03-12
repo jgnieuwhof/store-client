@@ -11,10 +11,10 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import ShopifyBuy from 'shopify-buy'
 
-import appConfig from 'app.config'
-import Routes from 'components/Routes'
-import ShopifyProvider from 'components/ShopifyProvider'
-import finalReducer from 'reducers/reduce'
+import appConfig from './app.config'
+import Routes from './components/Routes'
+import ShopifyProvider from './components/ShopifyProvider'
+import finalReducer from './reducers/reduce'
 
 const SHOPIFY = {
   client: ShopifyBuy.buildClient(appConfig.shopify),
@@ -38,7 +38,10 @@ window.onload = () => {
   ReactDOM.render(
     <Provider store={STORE}>
       <ShopifyProvider shopify={SHOPIFY}>
-        <Router history={browserHistory}>
+        <Router
+          onUpdate={() => window.scrollTo(0, 0)}
+          history={browserHistory}
+        >
           { Routes }
         </Router>
       </ShopifyProvider>

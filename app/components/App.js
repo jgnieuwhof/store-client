@@ -2,14 +2,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Footer from 'components/Footer'
-import Header from 'components/Header'
-import { setupCart } from 'reducers/reduceCart'
+import Footer from './Footer'
+import Header from './Header'
+import { setupCart } from '../reducers/reduceCart'
+import { fetchProducts } from '../reducers/reduceShop'
 
 class App extends Component {
   componentWillMount = () => {
     let { dispatch } = this.props
     dispatch(setupCart())
+    dispatch(fetchProducts())
   }
 
   render = () => {

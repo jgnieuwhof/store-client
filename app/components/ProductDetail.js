@@ -16,7 +16,7 @@ class ProductDetail extends Component {
 
   setProductFromProps = ({ props, fetch }) => {
     let { dispatch, products, params: { id } } = props
-    let product = products.find(p => p.id === +id)
+    let product = products[+id]
     if (product) {
       this.setState({ product })
     }
@@ -43,10 +43,6 @@ class ProductDetail extends Component {
     __html: description,
   })
 
-  backToStore = () => {
-    this.props.router.push(`/store`)
-  }
-
   addProductToCartHandler = (add) => {
     let { dispatch, router } = this.props
     let { product: { variant } } = this.state
@@ -60,7 +56,7 @@ class ProductDetail extends Component {
     let detailStyle = { paddingLeft: 20 }
     let actionText, disabled = false, add = false
     let { products, lineItems, params: { id } } = this.props
-    let product = products.find(p => p.id === +id)
+    let product = products[+id]
     if (!product) {
       return <Loading size='5x' />
     }
@@ -84,7 +80,7 @@ class ProductDetail extends Component {
         <Carousel className='top-buffer'>
           { product.images.map((image, i) => (
             <Carousel.Item key={i}>
-              <img height={600} src={image.src} />
+              <img height={400} src={image.src} />
             </Carousel.Item>
           ))}
         </Carousel>

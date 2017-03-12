@@ -6,13 +6,8 @@ import { withRouter } from 'react-router'
 
 import Loading from './Loading'
 import StoreCarousel from './StoreCarousel'
-import { fetchProducts } from '../reducers/reduceShop'
 
 class Store extends Component {
-  componentWillMount = () => {
-    this.props.dispatch(fetchProducts())
-  }
-
   productClick = (e, id) => {
     e.preventDefault()
     this.props.router.push(`/product/${id}`)
@@ -20,7 +15,7 @@ class Store extends Component {
 
   render = () => {
     let { products } = this.props
-    let loading = products.length === 0
+    let loading = Object.keys(products).length === 0
     return (
       <div className="store-container">
         <StoreCarousel />
@@ -30,7 +25,8 @@ class Store extends Component {
           }
           { !loading &&
             <Grid>
-              { products.map(product => {
+              { Object.keys(products).map(id => {
+                let product = products[id]
                 let showMeta = !!product.size
                 return (
                   <Col

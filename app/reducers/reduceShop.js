@@ -32,7 +32,7 @@ export const fetchProducts = () => {
 // ============================================================================
 
 const defaultState = {
-  products: [],
+  products: {},
 }
 
 export default function (state = defaultState, action) {
@@ -40,11 +40,16 @@ export default function (state = defaultState, action) {
   switch (action.type) {
   // ------------------------------------------------------------------------
   case shop.SET_PRODUCT:
-    update = { products: [ ...state.products, action.product ] }
+    update = { products: { [action.product.id]: action.product } }
     break
   // ------------------------------------------------------------------------
   case shop.SET_PRODUCTS:
-    update = { products: action.products }
+    update = {
+      products: action.products.reduce((obj, product) => ({
+        ...obj,
+        [product.id]: product,
+      }), {}),
+    }
     break
   }
   return update ? u(update, state) : state
