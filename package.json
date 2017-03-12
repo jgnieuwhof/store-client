@@ -35,6 +35,8 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
     "es6-promise": "^4.0.5",
+    "eslint-config-minimal": "^0.4.2",
+    "eslint-plugin-import": "^2.2.0",
     "font-awesome": "^4.7.0",
     "history": "^4.5.0",
     "html-webpack-plugin": "^2.25.0",

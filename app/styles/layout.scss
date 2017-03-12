@@ -47,7 +47,10 @@ body {
 }
 
 .top-buffer {
-  margin-top: $base-spacing;
+  margin-top: 15px;
+  @media(min-width: $screen-sm-min) {
+    margin-top: $base-spacing;
+  }
 }
 
 .top-border {
@@ -80,7 +83,7 @@ $footer-height: 75px;
 }
 
 .container {
-  transition: width 0.25s ease-in-out, border-width 0.25s;
+  transition: width 0.12s ease-in-out, border-width 0.25s;
   &.container-squeeze {
     @media(min-width: $screen-md-min) {
       border-left: 2px solid $gray-lighter;
@@ -101,7 +104,9 @@ $footer-height: 75px;
 
 .page-header-klass {
   .title {
-    margin: 3px 0 0 0;
+    h3 {
+      margin: 3px 0 0 0;
+    }
   }
 }
 

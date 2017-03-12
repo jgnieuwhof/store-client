@@ -1,31 +1,41 @@
 import React, { Component } from 'react'
-import { Button, Row, Col, Carousel } from 'react-bootstrap'
+import { Row, Col, Carousel } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 
-import CallToAction from 'components/CallToAction'
-import Loading from 'components/Loading'
-import PageHeader from 'components/PageHeader'
-import { productFromShopify } from 'helpers/shopify'
-import { addVariantToCart } from 'reducers/reduceCart'
+import CallToAction from './CallToAction'
+import Loading from './Loading'
+import PageHeader from './PageHeader'
+import { addVariantToCart } from '../reducers/reduceCart'
+import { fetchProduct } from '../reducers/reduceShop'
 
 class ProductDetail extends Component {
-  state = {
-    loading: true,
-    product: {},
+  state: {
+    product: null,
+  }
+
+  setProductFromProps = ({ props, fetch }) => {
+    let { dispatch, products, params: { id } } = props
+    let product = products.find(p => p.id === +id)
+    if (product) {
+      this.setState({ product })
+    }
+    else if (fetch) {
+      dispatch(fetchProduct({ id }))
+    }
   }
 
   componentWillMount = () => {
-    this.fetchProduct()
+    this.setProductFromProps({
+      props: this.props,
+      fetch: true,
+    })
   }
 
-  fetchProduct = async () => {
-    let { shopify: { client } } = this.context
-    let { productId } = this.props.params
-    let product = await client.fetchProduct(productId)
-    this.setState({
-      loading: false,
-      product: productFromShopify(product),
+  componentWillReceiveProps = (nextProps) => {
+    this.setProductFromProps({
+      props: nextProps,
+      fetch: true,
     })
   }
 
@@ -47,12 +57,13 @@ class ProductDetail extends Component {
   }
 
   render = () => {
-    let { loading, product } = this.state
-    if (loading) {
+    let detailStyle = { paddingLeft: 20 }
+    let actionText, disabled = false, add = false
+    let { products, lineItems, params: { id } } = this.props
+    let product = products.find(p => p.id === +id)
+    if (!product) {
       return <Loading size='5x' />
     }
-    let { lineItems } = this.props
-    let actionText, disabled = false, add = false
     if (!product.variant.available) {
       disabled = true
       actionText = `Sold Out`
@@ -67,27 +78,33 @@ class ProductDetail extends Component {
     return (
       <div className='product-detail fadein'>
         <PageHeader
-            button={{ page: `/store`, title: `Back to Store`, icon: `arrow-left` }}
-            title={product.title}
-          />
+          button={{ page: `/store`, title: `Back to Store`, icon: `arrow-left` }}
+          title={product.title}
+        />
         <Carousel className='top-buffer'>
           { product.images.map((image, i) => (
             <Carousel.Item key={i}>
-              <img height={600} src={image.src}/>
+              <img height={600} src={image.src} />
             </Carousel.Item>
           ))}
         </Carousel>
         <Row className='top-buffer' style={{ paddingRight: 20, paddingLeft: 20 }}>
           <Col md={12} className='well product-description'>
-            <div dangerouslySetInnerHTML={this.descriptionHTML(product.description)} />
+            <p><strong>Description:</strong></p>
+            <div
+              style={detailStyle}
+              dangerouslySetInnerHTML={this.descriptionHTML(product.description)}
+            />
+            <p><strong>Price: </strong></p>
+            <div style={detailStyle}>{product.variant.formattedPrice}</div>
           </Col>
         </Row>
         <CallToAction
-            onClick={() => {this.addProductToCartHandler(add)}}
-            disabled={disabled}
-            topBuffer={false}
-            title={actionText}
-          />
+          onClick={() => {this.addProductToCartHandler(add)}}
+          disabled={disabled}
+          topBuffer={false}
+          title={actionText}
+        />
       </div>
     )
   }
@@ -99,4 +116,5 @@ ProductDetail.contextTypes = {
 
 export default withRouter(connect(state => ({
   lineItems: state.cart.lineItems,
+  products: state.shop.products,
 }))(ProductDetail))

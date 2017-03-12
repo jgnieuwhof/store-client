@@ -12,8 +12,8 @@ const PageHeader = ({ button, title, router }) => (
         <span>{button.title}</span>
       </Button>
     </Col>
-    <Col xs={12} sm={6} className='text-center'>
-      <h3 className='title'>{ title }</h3>
+    <Col xs={12} sm={6} className='title text-center'>
+      <h3>{ title }</h3>
     </Col>
   </Row>
 )

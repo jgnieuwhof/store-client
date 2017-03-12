@@ -2,9 +2,17 @@
 import namespace from './namespace'
 
 export const cart = namespace(
-  'cart',
+  `cart`,
   [
-    'SET_ID',
-    'UPDATE_CART',
+    `SET_ID`,
+    `UPDATE_CART`,
+  ],
+)
+
+export const shop = namespace(
+  `shop`,
+  [
+    `SET_PRODUCT`,
+    `SET_PRODUCTS`,
   ],
 )
