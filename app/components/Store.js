@@ -17,7 +17,7 @@ class Store extends Component {
     let { products } = this.props
     let loading = Object.keys(products).length === 0
     return (
-      <div className="store-container">
+      <div className="store-container fadein">
         <StoreCarousel />
         <div className="store-items">
           { loading &&
