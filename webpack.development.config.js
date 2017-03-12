@@ -7,6 +7,7 @@ module.exports = {
   entry: [
     `webpack-dev-server/client?http://${serverConfig.HOST}:${serverConfig.PORT}`,
     'webpack/hot/only-dev-server',
+    'whatwg-fetch',
     './app/index'
   ],
   output: {
@@ -48,7 +49,6 @@ module.exports = {
        helpers: 'app/helpers',
        reducers: 'app/reducers',
        img: 'app/img',
-       util: 'app/util',
      },
      extensions: ['', '.js', '.scss'],
   }

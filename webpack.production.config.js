@@ -4,6 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
+    'whatwg-fetch',
     './app/index'
   ],
   output: {
@@ -48,7 +49,6 @@ module.exports = {
        helpers: 'app/helpers',
        reducers: 'app/reducers',
        img: 'app/img',
-       util: 'app/util'
      },
      extensions: ['', '.js', '.scss'],
   },

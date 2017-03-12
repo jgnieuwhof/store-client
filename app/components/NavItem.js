@@ -3,12 +3,15 @@ import { Link } from 'react-router'
 
 // NavLink wraps boostrap NavItem to inject 'active' from react-router
 const NavLink = (props, context) => {
-  let isActive = props.href && context.router.isActive(props.href, true)
-  let curClassName = props.className || ``
-  let className = isActive ? `${curClassName} active` : curClassName
+  let { router } = context
+  let { href, className, children } = props
+  let isActive = href && router.isActive(href, true)
+  let klassName = className || ``
   return (
-    <li className={className}>
-      <Link to={props.href}>{props.children}</Link>
+    <li className={isActive ? `${klassName} active` : klassName}>
+      <Link to={href}>
+        {children}
+      </Link>
     </li>
   )
 }

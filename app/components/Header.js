@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap'
 import { Link } from 'react-router'
 
+import CartBadge from 'components/CartBadge'
 import NavItem from 'components/NavItem'
 
 let Header = () => {
@@ -33,7 +34,9 @@ let Header = () => {
             </NavDropdown>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={1}>Cart Info Here</NavItem>
+            <NavItem eventKey={4} href="/cart">
+              <CartBadge />
+            </NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

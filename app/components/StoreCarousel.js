@@ -6,7 +6,7 @@ import cImage from 'img/content/store-slider/carousel.png'
 
 export default () => {
   return (
-    <Grid className="store-carousel">
+    <Grid className="store-carousel fadein-delay">
       <Carousel>
         <Carousel.Item>
           <img width={1140} height={600} src={cImage}/>

@@ -1,0 +1,32 @@
+
+.cart {
+  .line-item {
+    border-top: 2px solid $gray-lighter;
+    padding: 20px 0;
+
+    .thumbnail {
+      text-align: center;
+    }
+
+    &:last-child {
+      border-bottom: 2px solid $gray-lighter;
+    }
+
+    @media(max-width: $screen-xs-max) {
+      > div { margin-bottom: 15px; }
+      .thumbnail img {
+        width: 100%;
+      }
+    }
+    @media(min-width: $screen-sm-min) {
+      height: 150px;
+      > *, .thumbnail, .thumbnail * {
+        height: 100%;
+      }
+      > div:not(:first-child) {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

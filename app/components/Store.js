@@ -5,7 +5,7 @@ import { withRouter } from 'react-router'
 
 import Loading from 'components/Loading'
 import StoreCarousel from 'components/StoreCarousel'
-import { productFromShopify } from 'util/product'
+import { productFromShopify } from 'helpers/shopify'
 
 class Store extends Component {
   state = {
@@ -13,13 +13,13 @@ class Store extends Component {
     products: [],
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.fetchProducts()
   }
 
   fetchProducts = async () => {
-    let { shopify } = this.context
-    let shopifyProducts = await shopify.fetchAllProducts()
+    let { shopify: { client } } = this.context
+    let shopifyProducts = await client.fetchAllProducts()
     this.setState({
       loading: false,
       products: shopifyProducts.map(product => productFromShopify(product)),
