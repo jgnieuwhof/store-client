@@ -32,16 +32,6 @@ class Store extends Component {
   }
 
   render = () => {
-    let products = []
-    if (this.state.products.length) {
-      let product = this.state.products[0]
-      for(let i = 0; i < 8; i++) {
-        products = [
-          ...products,
-          { ...product, key: i },
-        ]
-      }
-    }
     return (
       <div className="store-container">
         <StoreCarousel />
@@ -51,22 +41,31 @@ class Store extends Component {
           }
           { !this.state.loading &&
             <Grid>
-              { products.map(product => (
-                <Col
-                    key={product.key}
-                    xs={6} md={4} lg={3}
-                    className="center-content top-buffer fadein"
-                  >
-                  <Thumbnail
-                      href=""
-                      className="store-thumbnail center-content"
-                      onClick={e => { this.productClick(e, product.id) }}
-                      src={product.images[0].src}
+              { this.state.products.map(product => {
+                let showMeta = !!product.size
+                return (
+                  <Col
+                      key={product.id}
+                      xs={6} md={4} lg={3}
+                      className="center-content top-buffer fadein"
                     >
-                    <span>{product.title}</span>
-                  </Thumbnail>
-                </Col>
-              ))}
+                    <Thumbnail
+                        className={`store-thumbnail center-content`}
+                        onClick={e => { this.productClick(e, product.id) }}
+                        src={product.images[0].src}
+                      >
+                      <span className={`title text-center ${showMeta?`with-meta`:``}`}>
+                        {product.title}
+                      </span>
+                      { showMeta && (
+                        <span className='meta'>
+                          <span>{`Size: ${product.size}`}</span>
+                        </span>
+                      )}
+                    </Thumbnail>
+                  </Col>
+                )}
+              )}
             </Grid>
           }
         </div>

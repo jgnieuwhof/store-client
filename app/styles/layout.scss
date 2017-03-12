@@ -1,5 +1,6 @@
 
 $min-viewport-height: 850px;
+$base-spacing: 30px;
 
 html,
 body {
@@ -45,11 +46,18 @@ body {
   align-items: center;
 }
 
+.top-buffer {
+  margin-top: $base-spacing;
+}
+
+.top-border {
+  border-top: 2px solid $gray-lighter;
+}
+
 // ============================================================================
 // Layout
 // ============================================================================
 $footer-height: 75px;
-$base-spacing: 30px;
 
 .body {
   margin-bottom: $base-spacing;
@@ -71,10 +79,6 @@ $base-spacing: 30px;
   color: $gray;
 }
 
-.top-buffer {
-  margin-top: $base-spacing;
-}
-
 .container {
   transition: width 0.25s ease-in-out, border-width 0.25s;
   &.container-squeeze {
@@ -92,6 +96,12 @@ $base-spacing: 30px;
   }
   img {
     margin: 0 auto;
+  }
+}
+
+.page-header-klass {
+  .title {
+    margin: 3px 0 0 0;
   }
 }
 

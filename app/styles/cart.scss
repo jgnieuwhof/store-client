@@ -1,8 +1,11 @@
 
 .cart {
-  .line-item {
-    border-top: 2px solid $gray-lighter;
+  .line-items > div {
     padding: 20px 0;
+
+    h4 {
+      margin-top: 0px;
+    }
 
     .thumbnail {
       text-align: center;

@@ -3,7 +3,9 @@ import { Button, Row, Col, Carousel } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 
+import CallToAction from 'components/CallToAction'
 import Loading from 'components/Loading'
+import PageHeader from 'components/PageHeader'
 import { productFromShopify } from 'helpers/shopify'
 import { addVariantToCart } from 'reducers/reduceCart'
 
@@ -49,15 +51,13 @@ class ProductDetail extends Component {
     if (loading) {
       return <Loading size='5x' />
     }
-    let actionText, disabled = false, add = false
     let { lineItems } = this.props
-    let { variant } = product
-    let { available } = variant
-    if (!available) {
+    let actionText, disabled = false, add = false
+    if (!product.variant.available) {
       disabled = true
       actionText = `Sold Out`
     }
-    else if (lineItems && lineItems.find(li => li.variant_id === variant.id)) {
+    else if (lineItems && lineItems.find(li => li.variant_id === product.variant.id)) {
       actionText = `Go to Cart`
     }
     else {
@@ -66,7 +66,10 @@ class ProductDetail extends Component {
     }
     return (
       <div className='product-detail fadein'>
-        <h3 className='text-center'>{product.title}</h3>
+        <PageHeader
+            button={{ page: `/store`, title: `Back to Store`, icon: `arrow-left` }}
+            title={product.title}
+          />
         <Carousel className='top-buffer'>
           { product.images.map((image, i) => (
             <Carousel.Item key={i}>
@@ -74,21 +77,17 @@ class ProductDetail extends Component {
             </Carousel.Item>
           ))}
         </Carousel>
-        <Row className='top-buffer'>
-          <Col md={12} className='product-description'>
+        <Row className='top-buffer' style={{ paddingRight: 20, paddingLeft: 20 }}>
+          <Col md={12} className='well product-description'>
             <div dangerouslySetInnerHTML={this.descriptionHTML(product.description)} />
           </Col>
         </Row>
-        <Row className='action-buttons top-buffer'>
-          <Col xs={12} sm={6}>
-            <Button onClick={() => {this.addProductToCartHandler(add)}} disabled={disabled}>
-              {actionText}
-            </Button>
-          </Col>
-          <Col xs={12} sm={6} className='text-right'>
-            <Button onClick={this.backToStore}>Back to Store</Button>
-          </Col>
-        </Row>
+        <CallToAction
+            onClick={() => {this.addProductToCartHandler(add)}}
+            disabled={disabled}
+            topBuffer={false}
+            title={actionText}
+          />
       </div>
     )
   }

@@ -4,6 +4,8 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 
+import CallToAction from 'components/CallToAction'
+import PageHeader from 'components/PageHeader'
 import { removeItemFromCart } from 'reducers/reduceCart'
 
 class Cart extends Component {
@@ -24,56 +26,46 @@ class Cart extends Component {
   }
 
   render = () => {
-    let { cart, router } = this.props
+    let { cart } = this.props
     let { lineItems } = cart
     return (
       <div className='cart'>
-        <Row className='action-buttons'>
-          <Col xs={12} sm={6}>
-            <Button onClick={() => { router.push(`/store`) }}>
-              <FontAwesome name='arrow-left' />
-              <span>Back to Store</span>
-            </Button>
-          </Col>
-        </Row>
-        <div>
-          { lineItems.map(lineItem => (
-            <Row key={lineItem.id} className='top-buffer line-item'>
-              <Col xs={4} sm={2}>
-                <Thumbnail
-                    onClick={() => { this.productClick(lineItem.product_id) }}
-                    src={lineItem.image.src}
-                  />
-              </Col>
-              <Col sm={8}>
-                <h4>
+        <PageHeader
+            title='My Cart'
+            button={{ page: `/store`, title: `Back to Store`, icon: `arrow-left` }}
+          />
+        <div className='line-items top-buffer'>
+          { lineItems.map(lineItem => {
+            let price = (lineItem.line_price * lineItem.quantity).toFixed(2)
+            return (
+              <Row key={lineItem.id} className='top-border'>
+                <Col xs={4} sm={2}>
+                  <Thumbnail
+                      onClick={() => { this.productClick(lineItem.product_id) }}
+                      src={lineItem.image.src}
+                    />
+                </Col>
+                <Col sm={8}>
                   <a onClick={() => { this.productClick(lineItem.product_id) }}>
-                    { lineItem.title }
+                    <h4>{lineItem.title}</h4>
+                    <span>{`// Price: $${price}`}</span>
                   </a>
-                </h4>
-              </Col>
-              <Col xs={12} sm={2} className='action-buttons'>
-                <Button onClick={() => { this.removeItem(lineItem.id)}}>
-                  <FontAwesome name='times'/>
-                  <span>Remove</span>
-                </Button>
-              </Col>
-            </Row>
-          ))}
+                </Col>
+                <Col xs={12} sm={2} className='action-buttons'>
+                  <Button onClick={() => { this.removeItem(lineItem.id)}}>
+                    <FontAwesome name='times'/>
+                    <span>Remove</span>
+                  </Button>
+                </Col>
+              </Row>
+            )
+          })}
         </div>
-        <Row className='action-buttons top-buffer'>
-          <Col xs={12} sm={6} smOffset={3} className='text-center'>
-            <Button
-                block
-                bsSize='large'
-                bsStyle='primary'
-                onClick={this.checkout}
-                disabled={!lineItems.length}
-              >
-              Checkout
-            </Button>
-          </Col>
-        </Row>
+        <CallToAction
+            onClick={this.checkout}
+            disabled={!lineItems.length}
+            title='Checkout'
+          />
       </div>
     )
   }
