@@ -9,10 +9,10 @@
       cursor: pointer;
 
       img, .caption {
-        @media (max-width: $screen-sm-max) { width: 100%; max-height: 300px; }
-        @media (min-width: $screen-sm-min) { width: 330px; height: 330px; }
-        @media (min-width: $screen-md-min) { width: 283px; height: 283px; }
-        @media (min-width: $screen-lg-min) { width: 255px; height: 255px; }
+        @media (max-width: $screen-sm-max) { width: 100%; }
+        @media (min-width: $screen-sm-min) { width: 345px; }
+        @media (min-width: $screen-md-min) { width: 293px; }
+        @media (min-width: $screen-lg-min) { width: 262px; }
       }
 
       .caption {
@@ -51,9 +51,6 @@
           }
           transition: .5s;
           opacity: 0;
-          &:hover {
-            opacity: 1;
-          }
           @media (min-width: $screen-sm-min) {
             font-size:25px;
             padding:25px;

@@ -1,17 +1,18 @@
 import React from 'react'
 import Helmet from "react-helmet"
 
-import favicon from 'img/favicon.ico'
+import withCanTouch from './withCanTouch'
+import favicon from '../img/favicon.ico'
 
-let Site = ({ children }) => {
+let Site = ({ canTouch, children }) => {
   let faviconConfig = [{
-    rel: "icon",
+    rel: `icon`,
     href: favicon,
-    type: "img/ico",
+    type: `img/ico`,
   }]
-
+  let withHover = canTouch ? `` : `with-hover`
   return (
-    <div className="site-container">
+    <div className={`site-container ${withHover}`}>
       <Helmet link={faviconConfig} />
       <div>
         { children }
@@ -20,4 +21,4 @@ let Site = ({ children }) => {
   )
 }
 
-export default Site
+export default withCanTouch(Site)

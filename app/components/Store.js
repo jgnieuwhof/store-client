@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { Grid, Col, Thumbnail } from 'react-bootstrap'
+import { Row, Col, Thumbnail } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
@@ -8,11 +8,6 @@ import Loading from './Loading'
 import StoreCarousel from './StoreCarousel'
 
 class Store extends Component {
-  productClick = (e, id) => {
-    e.preventDefault()
-    this.props.router.push(`/product/${id}`)
-  }
-
   render = () => {
     let { products } = this.props
     let loading = Object.keys(products).length === 0
@@ -24,7 +19,7 @@ class Store extends Component {
             <Loading size='5x' />
           }
           { !loading &&
-            <Grid>
+            <Row>
               { Object.keys(products).map(id => {
                 let product = products[id]
                 let showMeta = !!product.size
@@ -36,7 +31,7 @@ class Store extends Component {
                   >
                     <Thumbnail
                       className='store-thumbnail'
-                      onClick={e => { this.productClick(e, product.id) }}
+                      onClick={() => { this.props.router.push(`/product/${product.id}`) }}
                       src={product.images[0].src}
                     >
                       <span className={`title text-center ${showMeta ? `with-meta` : ``}`}>
@@ -51,7 +46,7 @@ class Store extends Component {
                   </Col>
                 )}
               )}
-            </Grid>
+            </Row>
           }
         </div>
       </div>
