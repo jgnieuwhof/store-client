@@ -22,7 +22,7 @@ class Store extends Component {
         arr.includes(type) ? arr : [ ...arr, type ]
       ), [])
       products.sort((p1, p2) => (
-        p1.available && p2.available ? 0 : (p1.available ? -1 : 1)
+        p1.variant.available && p2.variant.available ? 0 : (p1.variant.available ? -1 : 1)
       ))
       this.setState({ products, types })
     }
