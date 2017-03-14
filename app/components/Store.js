@@ -7,16 +7,15 @@ import Loading from './Loading'
 import ProductThumbnail from './ProductThumbnail'
 import StoreCarousel from './StoreCarousel'
 import { productArray } from '../helpers/product'
+import { setFilter } from '../reducers/reduceShop'
 
 class Store extends Component {
   state = {
-    filter: null,
     products: [],
     types: [],
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    let { products: productHash } = nextProps
+  updateProducts = ({ products: productHash }) => {
     let products = productArray(productHash)
     if (products) {
       let types = products.reduce((arr, { type }) => (
@@ -29,8 +28,17 @@ class Store extends Component {
     }
   }
 
+  componentWillMount = () => {
+    this.updateProducts(this.props)
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    this.updateProducts(nextProps)
+  }
+
   render = () => {
-    let { products, types, filter: currentFilter } = this.state
+    let { products, types } = this.state
+    let { dispatch, filter: currentFilter } = this.props
     let loading = products.length === 0
     let filterProducts = products.filter(p => !currentFilter || p.type === currentFilter)
     let filterLabel = currentFilter ? `: ${currentFilter}` : ``
@@ -42,12 +50,12 @@ class Store extends Component {
             id='filter-dropdown'
             title={`Type${filterLabel}`}
           >
-            <MenuItem key='clear' onClick={() => {this.setState({ filter: null })}}>
+            <MenuItem key='clear' onClick={() => { dispatch(setFilter({ filter: null })) }}>
               All
             </MenuItem>
             <MenuItem divider />
             { types.map(filter => (
-              <MenuItem key={filter} onClick={() => {this.setState({ filter })}}>
+              <MenuItem key={filter} onClick={() => { dispatch(setFilter({ filter })) }}>
                 { filter }
               </MenuItem>
             ))}
@@ -72,4 +80,5 @@ class Store extends Component {
 
 export default connect(state => ({
   products: state.shop.products,
+  filter: state.shop.filter,
 }))(Store)

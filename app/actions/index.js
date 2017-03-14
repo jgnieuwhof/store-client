@@ -12,6 +12,7 @@ export const cart = namespace(
 export const shop = namespace(
   `shop`,
   [
+    `SET_FILTER`,
     `SET_PRODUCT`,
     `SET_PRODUCTS`,
   ],

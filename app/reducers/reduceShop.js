@@ -27,12 +27,19 @@ export const fetchProducts = () => {
   }
 }
 
+export const setFilter = ({ filter }) => {
+  return async dispatch => {
+    dispatch({ type: shop.SET_FILTER, filter })
+  }
+}
+
 // ============================================================================
 // Shop Reducer
 // ============================================================================
 
 const defaultState = {
   products: {},
+  filter: null,
 }
 
 export default function (state = defaultState, action) {
@@ -57,6 +64,11 @@ export default function (state = defaultState, action) {
         [product.id]: product,
       }), {}),
     }
+    break
+
+  // ------------------------------------------------------------------------
+  case shop.SET_FILTER:
+    update = { filter: action.filter }
     break
   }
 
