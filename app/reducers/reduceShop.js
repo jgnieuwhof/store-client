@@ -22,7 +22,7 @@ export const fetchProducts = () => {
     let shopifyProducts = await client.fetchAllProducts()
     dispatch({
       type: shop.SET_PRODUCTS,
-      products: shopifyProducts.map(product => productFromShopify(product)),
+      products: shopifyProducts.map(p => productFromShopify(p)),
     })
   }
 }
@@ -37,11 +37,18 @@ const defaultState = {
 
 export default function (state = defaultState, action) {
   let update
+
   switch (action.type) {
+
   // ------------------------------------------------------------------------
   case shop.SET_PRODUCT:
-    update = { products: { [action.product.id]: action.product } }
+    update = {
+      products: {
+        [action.product.id]: action.product,
+      },
+    }
     break
+
   // ------------------------------------------------------------------------
   case shop.SET_PRODUCTS:
     update = {
@@ -52,5 +59,6 @@ export default function (state = defaultState, action) {
     }
     break
   }
+
   return update ? u(update, state) : state
 }

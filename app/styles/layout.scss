@@ -16,20 +16,9 @@ body {
   animation: fadein 0.5s;
 }
 
-.fadein-delay {
-  animation: fadein-delay 0.75s;
-  animation-fill-mode: forwards;
-}
-
 @keyframes fadein {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-@keyframes fadein-delay {
-  0% { opacity: 0; }
-  75% { opacity: 0; }
-  100% { opacity: 1; }
 }
 
 // ============================================================================
