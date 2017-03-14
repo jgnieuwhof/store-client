@@ -1,6 +1,6 @@
 import u from 'updeep'
 
-import { cart as cartActions } from 'actions'
+import { cart as cartActions } from '../actions'
 
 // ============================================================================
 // Cart Action Creators
@@ -67,16 +67,17 @@ const defaultState = {
 export default function (state = defaultState, action) {
   let update
   switch (action.type) {
-    // ------------------------------------------------------------------------
-    case cartActions.SET_ID:
-      localStorage.cartId = action.id
-      update = { id: action.id }
-      break
 
-    // ------------------------------------------------------------------------
-    case cartActions.UPDATE_CART:
-      update = { ...action.payload }
-      break
+  // ------------------------------------------------------------------------
+  case cartActions.SET_ID:
+    localStorage.cartId = action.id
+    update = { id: action.id }
+    break
+
+  // ------------------------------------------------------------------------
+  case cartActions.UPDATE_CART:
+    update = { ...action.payload }
+    break
   }
   return update ? u(update, state) : state
 }

@@ -1,18 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
-import { Link } from 'react-router'
+import { withRouter } from 'react-router'
 
-let Splash = () => {
-  return (
-    <div className="splash-container full-size center-content">
-      <Grid className="text-center">
-        <h2>Welcome to the Store!</h2>
-        <Link to="/store" className="btn btn-lg btn-primary">
-          <span className="fa fa-sign-in" /><span> Enter Site</span>
-        </Link>
-      </Grid>
-    </div>
-  )
+import { daysBetween } from '../helpers/date'
+
+class Splash extends Component {
+  componentWillMount = () => {
+    if (localStorage.visited && daysBetween(Date.now(), localStorage.visited) <= 30) {
+      this.props.router.push(`/store`)
+    }
+  }
+
+  enterSite = () => {
+    localStorage.visited = Date.now()
+    this.props.router.push(`/store`)
+  }
+
+  render = () => {
+    return (
+      <div className='splash-container full-size center-content'>
+        <Grid className='text-center'>
+          <h2>Welcome to the Store!</h2>
+          <button
+            className='btn btn-lg btn-primary top-buffer'
+            onClick={this.enterSite}
+          >
+            Enter Site!
+          </button>
+        </Grid>
+      </div>
+    )
+  }
 }
 
-export default Splash
+export default withRouter(Splash)
