@@ -90,7 +90,8 @@ $footer-height: 75px;
     margin: 0 auto;
   }
   @media(max-width: $screen-sm-max) {
-    margin: 0 -15px;
+    margin-left: -15px;
+    margin-right: -15px;
   }
 }
 

@@ -73,10 +73,7 @@ class ProductDetail extends Component {
     }
     return (
       <div className='product-detail fadein'>
-        <PageHeader
-          button={{ page: `/store`, title: `Back to Store`, icon: `arrow-left` }}
-          title={product.title}
-        />
+        <PageHeader title={product.title} />
         <Carousel className='top-buffer'>
           { product.images.map((image, i) => (
             <Carousel.Item key={i}>

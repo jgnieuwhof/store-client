@@ -1,8 +1,10 @@
 
 import React from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
+import FontAwesome from 'react-fontawesome'
+import { withRouter } from 'react-router'
 
-let CallToAction = ({ onClick, disabled, title, topBuffer }) => {
+let CallToAction = ({ onClick, disabled, title, topBuffer, router }) => {
   if (topBuffer === undefined) topBuffer = true
   return (
     <Row className={`action-buttons ${topBuffer ? `top-buffer` : ``}`}>
@@ -17,8 +19,14 @@ let CallToAction = ({ onClick, disabled, title, topBuffer }) => {
           {title}
         </Button>
       </Col>
+      <Col className='hidden-sm' xs={12}>
+        <Button onClick={() => { router.push(`/store`) }}>
+          <FontAwesome name='arrow-left' />
+          <span>Store</span>
+        </Button>
+      </Col>
     </Row>
   )
 }
 
-export default CallToAction
+export default withRouter(CallToAction)

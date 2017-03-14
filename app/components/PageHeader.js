@@ -4,12 +4,12 @@ import { Row, Col, Button } from 'react-bootstrap'
 import FontAwesome from 'react-fontawesome'
 import { withRouter } from 'react-router'
 
-const PageHeader = ({ button, title, router }) => (
+const PageHeader = ({ title, router }) => (
   <Row className='page-header-klass action-buttons'>
-    <Col xs={12} sm={3}>
-      <Button onClick={() => { router.push(button.page) }}>
-        { button.icon && <FontAwesome name={`${button.icon}`} /> }
-        <span>{button.title}</span>
+    <Col className='hidden-xs' sm={3}>
+      <Button onClick={() => { router.push(`/store`) }}>
+        <FontAwesome name='arrow-left' />
+        <span>Store</span>
       </Button>
     </Col>
     <Col xs={12} sm={6} className='title text-center'>

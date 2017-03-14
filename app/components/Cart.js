@@ -4,9 +4,9 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 
-import CallToAction from 'components/CallToAction'
-import PageHeader from 'components/PageHeader'
-import { removeItemFromCart } from 'reducers/reduceCart'
+import CallToAction from './CallToAction'
+import PageHeader from './PageHeader'
+import { removeItemFromCart } from '../reducers/reduceCart'
 
 class Cart extends Component {
   checkout = () => {
@@ -30,10 +30,7 @@ class Cart extends Component {
     let { lineItems } = cart
     return (
       <div className='cart'>
-        <PageHeader
-            title='My Cart'
-            button={{ page: `/store`, title: `Back to Store`, icon: `arrow-left` }}
-          />
+        <PageHeader title='My Cart' />
         <div className='line-items top-buffer'>
           { lineItems.map(lineItem => {
             let price = (lineItem.line_price * lineItem.quantity).toFixed(2)
@@ -41,9 +38,9 @@ class Cart extends Component {
               <Row key={lineItem.id} className='top-border'>
                 <Col xs={4} sm={2}>
                   <Thumbnail
-                      onClick={() => { this.productClick(lineItem.product_id) }}
-                      src={lineItem.image.src}
-                    />
+                    onClick={() => { this.productClick(lineItem.product_id) }}
+                    src={lineItem.image.src}
+                  />
                 </Col>
                 <Col sm={8}>
                   <a onClick={() => { this.productClick(lineItem.product_id) }}>
@@ -53,7 +50,7 @@ class Cart extends Component {
                 </Col>
                 <Col xs={12} sm={2} className='action-buttons'>
                   <Button onClick={() => { this.removeItem(lineItem.id)}}>
-                    <FontAwesome name='times'/>
+                    <FontAwesome name='times' />
                     <span>Remove</span>
                   </Button>
                 </Col>
@@ -62,10 +59,10 @@ class Cart extends Component {
           })}
         </div>
         <CallToAction
-            onClick={this.checkout}
-            disabled={!lineItems.length}
-            title='Checkout'
-          />
+          onClick={this.checkout}
+          disabled={!lineItems.length}
+          title='Checkout'
+        />
       </div>
     )
   }
