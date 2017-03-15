@@ -19,7 +19,7 @@ let CallToAction = ({ onClick, disabled, title, topBuffer, router }) => {
           {title}
         </Button>
       </Col>
-      <Col className='hidden-sm' xs={12}>
+      <Col className='hidden-sm hidden-md hidden-lg' xs={12}>
         <Button onClick={() => { router.push(`/store`) }}>
           <FontAwesome name='arrow-left' />
           <span>Store</span>
