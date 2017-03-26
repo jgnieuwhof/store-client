@@ -1,6 +1,14 @@
 $headings-font-family: Roboto, $font-family-sans-serif;
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,700);
 
+@font-face {
+  font-family: 'showguide';
+  src: url('styles/fonts/showguide/showguide-webfont.woff2') format('woff2'),
+       url('styles/fonts/showguide/showguide-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .separator-bullet {
   position: relative;
   top: 1px;
@@ -14,4 +22,19 @@ a {
   &:hover, &:active {
     text-decoration: none;
   }
+}
+
+h1, h2 {
+  font-family: showguide;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 60px;
+  @media(max-width: $screen-sm-max) { font-size: 45px; }
+}
+
+h2 {
+  font-size: 40px;
+  @media(max-width: $screen-sm-max) { font-size: 35px; }
 }

@@ -2,31 +2,32 @@ import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 
-import { daysBetween } from '../helpers/date'
+import Gun from './icons/Gun'
+
+const VERSION = 1 // Increment to force users to view the splash
 
 class Splash extends Component {
   componentWillMount = () => {
-    if (localStorage.visited && daysBetween(Date.now(), localStorage.visited) <= 30) {
+    if (+localStorage.version === VERSION) {
       this.props.router.push(`/store`)
     }
   }
 
   enterSite = () => {
-    localStorage.visited = Date.now()
+    localStorage.version = VERSION
     this.props.router.push(`/store`)
   }
 
   render = () => {
     return (
       <div className='splash-container full-size center-content'>
-        <Grid className='text-center'>
-          <h2>Welcome to the Store!</h2>
-          <button
-            className='btn btn-lg btn-primary top-buffer'
-            onClick={this.enterSite}
-          >
-            Enter Site!
-          </button>
+        <Grid className='text-center' style={{ maxWidth: 900, padding: 0 }}>
+          <h1 className='splash-header'>RAMBLE ON</h1>
+          <img style={{ width: `100%` }} src='img/content/splash.jpg' />
+          <a className='enter-site pull-right' onClick={this.enterSite}>
+            <span>ENTER</span>
+            <Gun size={45} color='white' />
+          </a>
         </Grid>
       </div>
     )
