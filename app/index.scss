@@ -2,7 +2,8 @@
 // Bootstrap Overrides
 // ============================================================================
 $brand-primary: rgb(114, 162, 180);
-$text-color:      #000;
+$gray-dark: #31312f;
+$text-color: #000;
 
 $fa-font-path: "./../node_modules/font-awesome/fonts";
 @import "./../node_modules/font-awesome/scss/font-awesome.scss";

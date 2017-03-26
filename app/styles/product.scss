@@ -1,0 +1,13 @@
+
+// ============================================================================
+// Product Detail
+// ============================================================================
+.product-detail {
+  .carousel-inner, .carousel-control {
+    background: transparent;
+    color: $gray-dark;
+    img {
+      max-height: 400px !important;
+    }
+  }
+}
