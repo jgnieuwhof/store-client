@@ -1,5 +1,5 @@
 
-export const set = ({ key, value }) => {
+export const lsSet = (key, value) => {
   try {
     localStorage.setItem(key, value)
     return true
@@ -9,7 +9,7 @@ export const set = ({ key, value }) => {
   }
 }
 
-export const get = key => {
+export const lsGet = key => {
   try {
     return localStorage.getItem(key)
   }

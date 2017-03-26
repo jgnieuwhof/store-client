@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { ButtonToolbar, DropdownButton, MenuItem, Row } from 'react-bootstrap'
+import { Button, ButtonGroup, ButtonToolbar, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import BoloText from './BoloText'
@@ -9,6 +9,36 @@ import ProductThumbnail from './ProductThumbnail'
 import StoreCarousel from './StoreCarousel'
 import { productArray } from '../helpers/product'
 import { setFilter } from '../reducers/reduceShop'
+
+const Filter = connect()(({ children, dispatch, filter, current }) => (
+  <Button
+    className={filter === current ? `active` : ``}
+    onClick={() => dispatch(setFilter({ filter }))}
+  >
+    { children }
+  </Button>
+))
+
+const Filters = ({ types, current }) => (
+  <div className='filters top-buffer'>
+    <ButtonToolbar>
+      <ButtonGroup>
+        <Filter filter={null} current={current}>All</Filter>
+        <Filter filter='new' current={current}>New Arrivals</Filter>
+        { types.map(filter => (
+          <Filter
+            key={filter}
+            filter={filter}
+            current={current}
+          >
+            { filter }
+          </Filter>
+        ))}
+      </ButtonGroup>
+      <Button>Request Custom Order</Button>
+    </ButtonToolbar>
+  </div>
+)
 
 class Store extends Component {
   state = {
@@ -49,12 +79,17 @@ class Store extends Component {
 
   render = () => {
     let { products, types, loaded } = this.state
-    let { dispatch, filter: currentFilter } = this.props
+    let { currentFilter } = this.props
     let loading = products.length === 0 && Object.values(loaded).every(l => !l)
-    let filterProducts = products.filter(p => {
-      return loaded[p.id] && (!currentFilter || p.type === currentFilter)
-    })
-    let filterLabel = currentFilter ? `: ${currentFilter}` : ``
+    let today = new Date()
+    let newCutoff = today.setMonth(today.getMonth() - 1)
+    let filteredProducts = products.filter(p => (
+      loaded[p.id] &&
+        (!currentFilter ||
+          p.type === currentFilter ||
+          (currentFilter === `new` && p.createdAt > newCutoff)
+        )
+    ))
     return (
       <div className='store-container fadein'>
         <h1 className='text-center hidden-xs hidden-sm'>
@@ -67,23 +102,9 @@ class Store extends Component {
           }
           { !loading &&
             <div>
-              <div className='filters top-buffer'>
-                <ButtonToolbar>
-                  <DropdownButton id='filter-dropdown' title={`Type${filterLabel}`}>
-                    <MenuItem key='clear' onClick={() => { dispatch(setFilter({ filter: null })) }}>
-                      <span>All</span>
-                    </MenuItem>
-                    <MenuItem divider />
-                    { types.map(filter => (
-                      <MenuItem key={filter} onClick={() => { dispatch(setFilter({ filter })) }}>
-                        { filter }
-                      </MenuItem>
-                    ))}
-                  </DropdownButton>
-                </ButtonToolbar>
-              </div>
+              <Filters types={types} current={currentFilter} />
               <Row>
-                { filterProducts.map(product => (
+                { filteredProducts.map(product => (
                   <ProductThumbnail key={product.id} product={product} />
                 )) }
               </Row>
@@ -97,5 +118,5 @@ class Store extends Component {
 
 export default connect(state => ({
   products: state.shop.products,
-  filter: state.shop.filter,
+  currentFilter: state.shop.filter,
 }))(Store)

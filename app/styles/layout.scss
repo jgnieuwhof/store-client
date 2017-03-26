@@ -104,6 +104,12 @@ $footer-height: 75px;
 }
 
 .navbar {
+  .navbar-brand {
+    color: $gray-lighter;
+    @media(min-width: $screen-md-min) {
+      display: none;
+    }
+  }
   @media(max-width: $screen-xs-max) {
     margin-bottom: 0;
   }

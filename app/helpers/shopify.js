@@ -10,11 +10,13 @@ export const productFromShopify = (shopifyProduct) => {
     attrs: {
       product_type: type,
       tags,
+      created_at,
     },
   } = shopifyProduct
   let variant = variants[0]
   return {
     id, title, description, variant, type, tags, available,
+    createdAt: Date.parse(created_at),
     size: variant.optionValues.find(o => o.name.toUpperCase() === `SIZE`).value,
     images: images.map(image => {
       let img = new Image()

@@ -16,17 +16,17 @@ a {
   }
 }
 
-h1, h2 {
+h1, h2, .showguide {
   font-family: showguide;
   letter-spacing: 1px;
-}
-
-h1 {
-  font-size: 45px;
   span {
     position: relative;
     top: 0.07em;
   }
+}
+
+h1 {
+  font-size: 45px;
   .bolo-text svg {
     width: 80px;
   }

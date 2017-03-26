@@ -16,8 +16,8 @@ let Header = () => {
     <div className="header-container">
       <Navbar inverse>
         <Navbar.Header>
-          <Navbar.Brand className='hidden-md hidden-lg'>
-            <Link to="/store">Ramble On</Link>
+          <Navbar.Brand className='showguide'>
+            <Link to="/store"><span>RAMBLE ON</span></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

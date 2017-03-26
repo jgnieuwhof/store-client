@@ -4,7 +4,9 @@ import { Col, Thumbnail } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 
 const ProductThumbnail = ({ product, router }) => {
-  let showMeta = !!product.size || !product.variant.available
+  let showMeta = !!product.size
+  let soldOut = !product.variant.available
+  let titleClass = `${soldOut ? `sold-out` : ``} ${showMeta ? `with-meta` : ``}`
   return (
     <Col
       key={product.id}
@@ -16,12 +18,12 @@ const ProductThumbnail = ({ product, router }) => {
         onClick={() => { router.push(`/product/${product.id}`) }}
         src={product.images[0].src}
       >
-        <span className={`title text-center ${showMeta ? `with-meta` : ``}`}>
-          {product.title}
+        <span className={`title text-center showguide ${titleClass}`}>
+          <h2><span>{ soldOut ? `SOLD OUT` : product.title }</span></h2>
         </span>
         { showMeta && (
           <span className='meta'>
-            <span>{!product.variant.available ? `Sold Out` : `Size: ${product.size}`}</span>
+            <span>{`Size: ${product.size}`}</span>
           </span>
         )}
       </Thumbnail>
