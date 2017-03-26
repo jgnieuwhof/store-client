@@ -4,7 +4,7 @@ import React from 'react'
 import Icon from './Icon'
 
 export default ({ size, color }) => (
-  <Icon size={size} fullSize={394}>
+  <Icon className='gun' size={size} fullSize={394}>
     <g transform={`translate(0.0,394.0) scale(0.1,-0.1)`} fill={color} stroke="none">
       <path d="M3483 2751 l-21 -51 -580 0 c-570 0 -580 0 -628 21 -47 21 -60 22
     -490 22 l-443 0 -63 -48 c-133 -101 -163 -99 -312 15 -43 33 -86 39 -111 14

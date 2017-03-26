@@ -30,11 +30,11 @@ h1, h2 {
 }
 
 h1 {
-  font-size: 70px;
-  @media(max-width: $screen-sm-max) { font-size: 45px; }
+  font-size: 45px;
+  @media(min-width: $screen-sm-min) { font-size: 70px; }
 }
 
 h2 {
-  font-size: 40px;
-  @media(max-width: $screen-sm-max) { font-size: 35px; }
+  font-size: 25px;
+  @media(min-width: $screen-sm-min) { font-size: 40px; }
 }

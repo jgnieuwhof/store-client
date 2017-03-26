@@ -26,8 +26,8 @@ class Splash extends Component {
           <h1 className='splash-header'>RAMBLE ON</h1>
           <img style={{ width: `100%` }} src={splashImage} />
           <a className='enter-site pull-right' onClick={this.enterSite}>
-            <span>ENTER</span>
-            <Gun size={45} color='white' />
+            <h2>ENTER</h2>
+            <Gun color='white' />
           </a>
         </Grid>
       </div>
