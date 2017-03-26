@@ -8,6 +8,12 @@
     position: relative;
     min-height: 200px;
 
+    .filters {
+      padding: 15px 0;
+      border-top: 2px solid $gray-dark;
+      border-bottom: 2px solid $gray-dark;
+    }
+
     .thumbnail {
       position: relative;
       cursor: pointer;

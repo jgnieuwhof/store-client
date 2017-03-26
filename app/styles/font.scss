@@ -9,14 +9,6 @@ $headings-font-family: Roboto, $font-family-sans-serif;
   font-style: normal;
 }
 
-.separator-bullet {
-  position: relative;
-  top: 1px;
-
-  font-weight: bold;
-  padding: 0 2px;
-}
-
 a {
   cursor: pointer;
   &:hover, &:active {
@@ -31,10 +23,33 @@ h1, h2 {
 
 h1 {
   font-size: 45px;
+  span {
+    position: relative;
+    top: 0.07em;
+  }
+  .bolo-text svg {
+    width: 80px;
+  }
   @media(min-width: $screen-sm-min) { font-size: 70px; }
 }
 
 h2 {
   font-size: 25px;
   @media(min-width: $screen-sm-min) { font-size: 40px; }
+}
+
+.separator-bullet {
+  position: relative;
+  top: 1px;
+
+  font-weight: bold;
+  padding: 0 2px;
+}
+
+.bolo-text {
+  * {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 15px;
+  }
 }

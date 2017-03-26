@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { ButtonToolbar, DropdownButton, MenuItem, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
+import BoloText from './BoloText'
 import Loading from './Loading'
 import ProductThumbnail from './ProductThumbnail'
 import StoreCarousel from './StoreCarousel'
@@ -56,7 +57,9 @@ class Store extends Component {
     let filterLabel = currentFilter ? `: ${currentFilter}` : ``
     return (
       <div className='store-container fadein'>
-        <h1 className='text-center hidden-xs hidden-sm'>RAMBLE ON</h1>
+        <h1 className='text-center hidden-xs hidden-sm'>
+          <BoloText>RAMBLE ON</BoloText>
+        </h1>
         <StoreCarousel />
         <div className='store-items'>
           { loading &&
@@ -64,19 +67,21 @@ class Store extends Component {
           }
           { !loading &&
             <div>
-              <ButtonToolbar className='top-buffer'>
-                <DropdownButton id='filter-dropdown' title={`Type${filterLabel}`}>
-                  <MenuItem key='clear' onClick={() => { dispatch(setFilter({ filter: null })) }}>
-                    <span>All</span>
-                  </MenuItem>
-                  <MenuItem divider />
-                  { types.map(filter => (
-                    <MenuItem key={filter} onClick={() => { dispatch(setFilter({ filter })) }}>
-                      { filter }
+              <div className='filters top-buffer'>
+                <ButtonToolbar>
+                  <DropdownButton id='filter-dropdown' title={`Type${filterLabel}`}>
+                    <MenuItem key='clear' onClick={() => { dispatch(setFilter({ filter: null })) }}>
+                      <span>All</span>
                     </MenuItem>
-                  ))}
-                </DropdownButton>
-              </ButtonToolbar>
+                    <MenuItem divider />
+                    { types.map(filter => (
+                      <MenuItem key={filter} onClick={() => { dispatch(setFilter({ filter })) }}>
+                        { filter }
+                      </MenuItem>
+                    ))}
+                  </DropdownButton>
+                </ButtonToolbar>
+              </div>
               <Row>
                 { filterProducts.map(product => (
                   <ProductThumbnail key={product.id} product={product} />
