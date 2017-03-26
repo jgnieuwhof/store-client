@@ -12,7 +12,7 @@ import { setFilter } from '../reducers/reduceShop'
 
 const Filter = connect()(({ children, dispatch, filter, current }) => (
   <Button
-    className={filter === current ? `active` : ``}
+    className={`naked ${filter === current ? `active` : ``}`}
     onClick={() => dispatch(setFilter({ filter }))}
   >
     { children }
@@ -20,7 +20,7 @@ const Filter = connect()(({ children, dispatch, filter, current }) => (
 ))
 
 const Filters = ({ types, current }) => (
-  <div className='filters top-buffer'>
+  <div className='filters top-buffer bordered'>
     <ButtonToolbar>
       <ButtonGroup>
         <Filter filter={null} current={current}>All</Filter>
@@ -35,7 +35,7 @@ const Filters = ({ types, current }) => (
           </Filter>
         ))}
       </ButtonGroup>
-      <Button>Request Custom Order</Button>
+      <Button className='naked'>Request Custom Order</Button>
     </ButtonToolbar>
   </div>
 )

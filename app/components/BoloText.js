@@ -3,10 +3,10 @@ import React from 'react'
 
 import Bolo from './icons/Bolo'
 
-export default ({ children }) => (
+export default ({ boloClass, children }) => (
   <div className='bolo-text'>
-    <Bolo />
+    <Bolo className={boloClass} />
     <span>{ children }</span>
-    <Bolo style={{ transform: `scale(-1,1)` }} />
+    <Bolo className={boloClass} style={{ transform: `scale(-1,1)` }} />
   </div>
 )

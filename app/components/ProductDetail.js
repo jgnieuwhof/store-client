@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Carousel } from 'react-bootstrap'
+import { Row, Col, Thumbnail } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 
@@ -10,33 +10,19 @@ import { addVariantToCart } from '../reducers/reduceCart'
 import { fetchProduct } from '../reducers/reduceShop'
 
 class ProductDetail extends Component {
-  state: {
-    product: null,
+  state = {
+    featureImage: null,
   }
 
-  setProductFromProps = ({ props, fetch }) => {
-    let { dispatch, products, params: { id } } = props
-    let product = products[+id]
-    if (product) {
-      this.setState({ product })
-    }
-    else if (fetch) {
-      dispatch(fetchProduct({ id }))
-    }
+  product = () => {
+    let { products, params: { id } } = this.props
+    return products[+id]
   }
 
   componentWillMount = () => {
-    this.setProductFromProps({
-      props: this.props,
-      fetch: true,
-    })
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    this.setProductFromProps({
-      props: nextProps,
-      fetch: true,
-    })
+    let { dispatch, params: { id } } = this.props
+    if (!this.product())
+      dispatch(fetchProduct({ id }))
   }
 
   descriptionHTML = (description) => ({
@@ -45,7 +31,7 @@ class ProductDetail extends Component {
 
   addProductToCartHandler = (add) => {
     let { dispatch, router } = this.props
-    let { product: { variant } } = this.state
+    let { variant } = this.product()
     if (add) {
       dispatch(addVariantToCart({ variant }))
     }
@@ -53,8 +39,8 @@ class ProductDetail extends Component {
   }
 
   render = () => {
-    let detailStyle = { paddingLeft: 20 }
     let actionText, disabled = false, add = false
+    let { featureImage } = this.state
     let { products, lineItems, params: { id } } = this.props
     let product = products[+id]
     if (!product) {
@@ -62,40 +48,45 @@ class ProductDetail extends Component {
     }
     if (!product.variant.available) {
       disabled = true
-      actionText = `Sold Out`
+      actionText = `SOLD OUT`
     }
     else if (lineItems && lineItems.find(li => li.variant_id === product.variant.id)) {
-      actionText = `Go to Cart`
+      actionText = `GO TO CART`
     }
     else {
       add = true
-      actionText = `Add to Cart`
+      actionText = `ADD TO CART`
     }
     return (
       <div className='product-detail fadein'>
         <PageHeader title={product.title} />
-        <Carousel className='top-buffer'>
-          { product.images.map((image, i) => (
-            <Carousel.Item key={i}>
-              <img height={400} src={image.src} />
-            </Carousel.Item>
+        <Row className='feature-image center-content top-buffer'>
+          <img
+            style={{ maxHeight: 300 }}
+            className='img-responsive'
+            src={ featureImage || product.images[0].src }
+          />
+        </Row>
+        <Row className='thumbnails center-content'>
+          { product.images.map(({ src }, i) => (
+            <Col key={i} xs={4} sm={2}>
+              <Thumbnail
+                src={src}
+                onClick={() => this.setState({ featureImage: src })}
+              />
+            </Col>
           ))}
-        </Carousel>
-        <Row className='top-buffer' style={{ paddingRight: 20, paddingLeft: 20 }}>
-          <Col md={12} className='well product-description'>
-            <p><strong>Description:</strong></p>
-            <div
-              style={detailStyle}
-              dangerouslySetInnerHTML={this.descriptionHTML(product.description)}
-            />
-            <p><strong>Price: </strong></p>
-            <div style={detailStyle}>{product.variant.formattedPrice}</div>
+        </Row>
+        <Row className='top-buffer'>
+          <Col md={12} className='description'>
+            <div dangerouslySetInnerHTML={this.descriptionHTML(product.description)} />
+            <p><strong>Price: {product.variant.formattedPrice}</strong></p>
           </Col>
         </Row>
+        <div className='top-buffer hidden-md hidden-lg' />
         <CallToAction
           onClick={() => {this.addProductToCartHandler(add)}}
           disabled={disabled}
-          topBuffer={false}
           title={actionText}
         />
       </div>

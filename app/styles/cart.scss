@@ -2,6 +2,7 @@
 .cart {
   .line-items > div {
     padding: 20px 0;
+    border-top: 2px solid $gray-lighter;
 
     h4 {
       margin-top: 0px;

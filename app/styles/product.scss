@@ -3,6 +3,21 @@
 // Product Detail
 // ============================================================================
 .product-detail {
+  .thumbnails {
+    margin-top: 40px;
+    @media (min-width: $screen-xs-min) {
+      margin-top: 20px;
+      padding: 20px 20px 0 20px;
+      border-top: 2px solid $gray-light;
+      border-bottom: 2px solid $gray-light;
+    }
+    .thumbnail {
+      cursor: pointer;
+    }
+  }
+  .description {
+    font-size: 18px;
+  }
   .carousel-inner, .carousel-control {
     background: transparent;
     color: $gray-dark;

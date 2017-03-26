@@ -35,6 +35,9 @@ h1 {
 
 h2 {
   font-size: 25px;
+  .bolo-text svg {
+    width: 40px;
+  }
   @media(min-width: $screen-sm-min) { font-size: 40px; }
 }
 
@@ -51,5 +54,11 @@ h2 {
     display: inline-block;
     vertical-align: middle;
     margin: 0 15px;
+    &:first-child {
+      margin-right: 0;
+    }
+    &:last-child {
+      margin-left: 0;
+    }
   }
 }

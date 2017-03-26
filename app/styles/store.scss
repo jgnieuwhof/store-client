@@ -10,13 +10,7 @@
 
     .filters {
       padding: 15px 0;
-      border-top: 2px solid $gray-dark;
-      border-bottom: 2px solid $gray-dark;
       button {
-        background: transparent;
-        border: none;
-        outline: none;
-        box-shadow: none;
         &:last-child {
           float: right;
           @media (max-width: $screen-xs-max) {
@@ -31,13 +25,6 @@
     .thumbnail {
       position: relative;
       cursor: pointer;
-
-      img, .caption {
-        @media (max-width: $screen-sm-max) { width: 100%; }
-        @media (min-width: $screen-sm-min) { width: 345px; }
-        @media (min-width: $screen-md-min) { width: 293px; }
-        @media (min-width: $screen-lg-min) { width: 262px; }
-      }
 
       .caption {
         position: absolute;

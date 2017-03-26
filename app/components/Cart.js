@@ -35,7 +35,7 @@ class Cart extends Component {
           { lineItems.map(lineItem => {
             let price = (lineItem.line_price * lineItem.quantity).toFixed(2)
             return (
-              <Row key={lineItem.id} className='top-border'>
+              <Row key={lineItem.id}>
                 <Col xs={4} sm={2}>
                   <Thumbnail
                     onClick={() => { this.productClick(lineItem.product_id) }}
@@ -59,6 +59,7 @@ class Cart extends Component {
           })}
         </div>
         <CallToAction
+          className='top-buffer'
           onClick={this.checkout}
           disabled={!lineItems.length}
           title='Checkout'

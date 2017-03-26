@@ -10,6 +10,15 @@ body {
 }
 
 // ============================================================================
+// Bootstrap Override
+// ============================================================================
+.thumbnail {
+  padding: 0;
+  border: 0 none;
+  box-shadow: none;
+}
+
+// ============================================================================
 // Animations
 // ============================================================================
 .fadein {
@@ -42,8 +51,9 @@ body {
   }
 }
 
-.top-border {
-  border-top: 2px solid $gray-lighter;
+.bordered {
+  border-top: 2px solid $gray-dark;
+  border-bottom: 2px solid $gray-dark;
 }
 
 // ============================================================================
@@ -75,8 +85,6 @@ $footer-height: 75px;
   transition: width 0.12s ease-in-out, border-width 0.25s;
   &.container-squeeze {
     @media(min-width: $screen-md-min) {
-      border-left: 2px solid $gray-lighter;
-      border-right: 2px solid $gray-lighter;
       width: $screen-md-min;
     }
   }
@@ -119,6 +127,14 @@ $footer-height: 75px;
 // Buttons & Forms
 // ============================================================================
 
+button {
+  &.naked {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
 .btn {
   .fa {
     margin-right: 10px;
@@ -127,6 +143,8 @@ $footer-height: 75px;
 
 .action-buttons {
   button {
+    border-radius: 0px;
+    color: $gray-dark;
     @media(max-width: $screen-xs-max) {
       width: 100%;
       margin-bottom: 10px;
