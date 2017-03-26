@@ -56,6 +56,7 @@ class Store extends Component {
     let filterLabel = currentFilter ? `: ${currentFilter}` : ``
     return (
       <div className='store-container fadein'>
+        <h1 className='text-center hidden-xs hidden-sm'>RAMBLE ON</h1>
         <StoreCarousel />
         <div className='store-items'>
           { loading &&
@@ -64,12 +65,9 @@ class Store extends Component {
           { !loading &&
             <div>
               <ButtonToolbar className='top-buffer'>
-                <DropdownButton
-                  id='filter-dropdown'
-                  title={`Type${filterLabel}`}
-                >
+                <DropdownButton id='filter-dropdown' title={`Type${filterLabel}`}>
                   <MenuItem key='clear' onClick={() => { dispatch(setFilter({ filter: null })) }}>
-                    All
+                    <span>All</span>
                   </MenuItem>
                   <MenuItem divider />
                   { types.map(filter => (

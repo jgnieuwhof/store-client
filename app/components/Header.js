@@ -6,6 +6,7 @@ import {
   NavDropdown,
   MenuItem,
 } from 'react-bootstrap'
+import { Link } from 'react-router'
 
 import CartBadge from './CartBadge'
 import NavItem from './NavItem'
@@ -14,6 +15,12 @@ let Header = () => {
   return (
     <div className="header-container">
       <Navbar inverse>
+        <Navbar.Header>
+          <Navbar.Brand className='hidden-md hidden-lg'>
+            <Link to="/store">Ramble On</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
             <NavItem eventKey={1} href="/store">Store</NavItem>
