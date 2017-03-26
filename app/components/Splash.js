@@ -3,6 +3,7 @@ import { Grid } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 
 import Gun from './icons/Gun'
+import splashImage from '../img/content/splash.jpg'
 
 const VERSION = 1 // Increment to force users to view the splash
 
@@ -23,7 +24,7 @@ class Splash extends Component {
       <div className='splash-container full-size center-content'>
         <Grid className='text-center' style={{ maxWidth: 900, padding: 0 }}>
           <h1 className='splash-header'>RAMBLE ON</h1>
-          <img style={{ width: `100%` }} src='img/content/splash.jpg' />
+          <img style={{ width: `100%` }} src={splashImage} />
           <a className='enter-site pull-right' onClick={this.enterSite}>
             <span>ENTER</span>
             <Gun size={45} color='white' />
