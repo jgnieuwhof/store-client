@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { Button, ButtonGroup, ButtonToolbar, Row } from 'react-bootstrap'
+import { Button, ButtonToolbar, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import BoloText from './BoloText'
@@ -22,19 +22,17 @@ const Filter = connect()(({ children, dispatch, filter, current }) => (
 const Filters = ({ types, current }) => (
   <div className='filters top-buffer bordered'>
     <ButtonToolbar>
-      <ButtonGroup>
-        <Filter filter={null} current={current}>All</Filter>
-        <Filter filter='new' current={current}>New Arrivals</Filter>
-        { types.map(filter => (
-          <Filter
-            key={filter}
-            filter={filter}
-            current={current}
-          >
-            { filter }
-          </Filter>
-        ))}
-      </ButtonGroup>
+      <Filter filter={null} current={current}>All</Filter>
+      <Filter filter='new' current={current}>New Arrivals</Filter>
+      { types.map(filter => (
+        <Filter
+          key={filter}
+          filter={filter}
+          current={current}
+        >
+          { filter }
+        </Filter>
+      ))}
       <Button className='naked'>Request Custom Order</Button>
     </ButtonToolbar>
   </div>

@@ -34,11 +34,10 @@ h1 {
 }
 
 h2 {
-  font-size: 25px;
+  font-size: 40px;
   .bolo-text svg {
     width: 40px;
   }
-  @media(min-width: $screen-sm-min) { font-size: 40px; }
 }
 
 .separator-bullet {

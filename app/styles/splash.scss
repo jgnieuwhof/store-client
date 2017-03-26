@@ -21,6 +21,9 @@
       position: relative;
       top: 5px;
       margin: 0 10px 0 0;
+      @media(max-width: $screen-xs-max) {
+        font-size: 25px;
+      }
       @media(min-width: $screen-sm-min) {
         top: 7px;
       }
