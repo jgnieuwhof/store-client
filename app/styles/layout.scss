@@ -143,8 +143,12 @@ button {
 
 .action-buttons {
   button {
+    border: none;
     border-radius: 0px;
-    color: $gray-dark;
+    &.btn-primary {
+      color: $gray-lighter;
+      background-color: $gray-dark;
+    }
     @media(max-width: $screen-xs-max) {
       width: 100%;
       margin-bottom: 10px;

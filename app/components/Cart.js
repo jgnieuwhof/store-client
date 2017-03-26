@@ -62,7 +62,7 @@ class Cart extends Component {
           className='top-buffer'
           onClick={this.checkout}
           disabled={!lineItems.length}
-          title='Checkout'
+          title='CHECKOUT'
         />
       </div>
     )
