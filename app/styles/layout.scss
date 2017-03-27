@@ -163,6 +163,7 @@ button {
 .action-buttons {
   button {
     border: none;
+    border-radius: 0px;
     &.btn-primary {
       color: $gray-lighter;
       background-color: $gray-dark;
