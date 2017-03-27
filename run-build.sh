@@ -20,7 +20,7 @@ RESET="\033[0m"
 # =============================================================================
 
 echo "⌛ Preparing to build... (this should take a couple of minutes)"
-NODE_ENV=production webpack -p --config webpack.production.config.js
+API_URL=http://api.store.jgnieuwhof.xyz NODE_ENV=production webpack -p --config webpack.production.config.js
 echo "New Build complete."
 echo "Clearing old build..."
 rm -rf dist

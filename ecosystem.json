@@ -8,8 +8,7 @@
     "cwd"         : "/home/store/store-client/",
     "env_production" : {
        "NODE_ENV": "production",
-       "PORT": 3001,
-       "API_URL": "http://api.store.jgnieuwhof.xyz"
+       "PORT": 3001
     }
   }]
 }
