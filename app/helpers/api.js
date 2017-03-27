@@ -1,7 +1,7 @@
 
 export default async (endpoint, body) => {
   let response = await fetch(
-    `${API_URL}/api/${endpoint}`,
+    `${process.env.API_URL}/api/${endpoint}`,
     {
       headers: {
         'Accept': `application/json`,
