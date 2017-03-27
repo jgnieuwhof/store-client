@@ -59,7 +59,8 @@ body {
 // ============================================================================
 // Layout
 // ============================================================================
-$footer-height: 75px;
+$footer-height: 240px;
+$xs-footer-height: 450px;
 
 .body {
   margin-bottom: $base-spacing;
@@ -70,15 +71,33 @@ $footer-height: 75px;
   position: relative;
   min-height: 100vh;
   padding-bottom: $footer-height;
+  @media(max-width: $screen-xs-max) {
+    padding-bottom: $xs-footer-height;
+  }
 }
 
 .footer-container {
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: $footer-height;
-  padding: $base-spacing;
-  background-color: $gray-lighter;
-  color: $gray;
+  padding-top: $base-spacing;
+  background-color: $gray-dark;
+  color: $gray-lighter;
+  a {
+    color: $gray-lighter;
+  }
+  .email-form-container{
+    text-align: right;
+    @media(max-width: $screen-xs-max) {
+      text-align: left;
+      .email-form button {
+        margin-top: 15px;
+      }
+    }
+  }
+  @media(max-width: $screen-xs-max) {
+    height: $xs-footer-height;
+  }
 }
 
 .container {
@@ -144,7 +163,6 @@ button {
 .action-buttons {
   button {
     border: none;
-    border-radius: 0px;
     &.btn-primary {
       color: $gray-lighter;
       background-color: $gray-dark;
