@@ -18,15 +18,22 @@ RESET="\033[0m"
 # =============================================================================
 # Script
 # =============================================================================
-
-echo "⌛ Preparing to build... (this should take a couple of minutes)"
-API_URL=http://api.store.jgnieuwhof.xyz NODE_ENV=production webpack -p --config webpack.production.config.js
-echo "New Build complete."
-echo "Clearing old build..."
-rm -rf dist
-echo "Copying new build..."
-mv temp-build dist
-printf "$GREEN"
-echo "✅ Build DONE!"
+if [ -z ${API_URL+x} ]; then
+  printf "$RED"
+  echo "API_URL must be defined. Try this format: API_URL=http://123.456.78.90:1234 npm run build. Remember the http prefix!"
+else
+  printf "$YELLOW"
+  echo "Building with API_URL = $API_URL"
+  printf "$RESET"
+  echo "⌛ Preparing to build... (this should take a couple of minutes)"
+  API_URL="\"$API_URL\"" NODE_ENV=production webpack -p --config webpack.production.config.js
+  echo "New Build complete."
+  echo "Clearing old build..."
+  rm -rf dist
+  echo "Copying new build..."
+  mv temp-build dist
+  printf "$GREEN"
+  echo "✅ Build DONE!"
+fi
 
 printf "$RESET"
