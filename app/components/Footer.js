@@ -10,7 +10,7 @@ export default () => {
       <Grid>
         <Row>
           <Col xs={6} sm={3}>
-            <p><Link to='/about'>About / Contact</Link></p>
+            <p><Link to='/about'>About</Link></p>
             <p><Link to='/request'>Request Custom Order</Link></p>
             <p><Link to='/events'>Upcoming Events</Link></p>
           </Col>

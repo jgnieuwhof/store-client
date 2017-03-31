@@ -9,6 +9,10 @@ body {
   user-select: none;
 }
 
+html, body, a, button, .btn {
+  font-size: 15px;
+}
+
 // ============================================================================
 // Bootstrap Override
 // ============================================================================
@@ -64,7 +68,7 @@ $xs-footer-height: 450px;
 
 .body {
   margin-bottom: $base-spacing;
-  min-height: calc(100vh - 176px);
+  min-height: calc(100vh - $footer-height);
 }
 
 .app-container {

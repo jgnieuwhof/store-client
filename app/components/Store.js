@@ -80,7 +80,7 @@ class Store extends Component {
     let { currentFilter } = this.props
     let loading = products.length === 0 && Object.values(loaded).every(l => !l)
     let today = new Date()
-    let newCutoff = today.setMonth(today.getMonth() - 1)
+    let newCutoff = today.setMonth(today.getMonth() - 2)
     let filteredProducts = products.filter(p => (
       loaded[p.id] &&
         (!currentFilter ||

@@ -10,7 +10,7 @@ const ProductThumbnail = ({ product, router }) => {
   return (
     <Col
       key={product.id}
-      xs={6} md={4} lg={3}
+      xs={6} md={3} lg={3}
       className='fadein top-buffer'
     >
       <Thumbnail
