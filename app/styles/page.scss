@@ -1,5 +1,7 @@
 
 .page-container {
+  overflow: hidden;
+
   h2 {
     text-align: center;
   }
@@ -11,6 +13,9 @@
     margin: 0 auto;
     p {
       margin-bottom: 30px;
+    }
+    div {
+      margin-top: 15px;
     }
   }
 }
