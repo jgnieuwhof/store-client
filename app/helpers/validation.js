@@ -22,3 +22,8 @@ export const isValidNote = note => {
     return WARNING
   return ERROR
 }
+
+export const isValidTrackingNumber = trackingNumber => {
+  if (!trackingNumber) return null
+  return trackingNumber.length > 8 ? SUCCESS : ERROR
+}

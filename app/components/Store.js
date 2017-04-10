@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react'
-import { Button, ButtonToolbar, Row } from 'react-bootstrap'
+import { Button, Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 
 import BoloText from './BoloText'
 import Loading from './Loading'
@@ -21,20 +22,27 @@ const Filter = connect()(({ children, dispatch, filter, current }) => (
 
 const Filters = ({ types, current }) => (
   <div className='filters top-buffer bordered'>
-    <ButtonToolbar>
-      <Filter filter={null} current={current}>All</Filter>
-      <Filter filter='new' current={current}>New Arrivals</Filter>
-      { types.map(filter => (
-        <Filter
-          key={filter}
-          filter={filter}
-          current={current}
+    <Row>
+      <Col xs={12}>
+        <Filter filter={null} current={current}>All</Filter>
+        <Filter filter='new' current={current}>New Arrivals</Filter>
+        { types.map(filter => (
+          <Filter
+            key={filter}
+            filter={filter}
+            current={current}
+          >
+            { filter }
+          </Filter>
+        ))}
+        <Button
+          className='naked'
+          onClick={() => { browserHistory.push(`/contact/customOrderRequest`) }}
         >
-          { filter }
-        </Filter>
-      ))}
-      <Button className='naked'>Request Custom Order</Button>
-    </ButtonToolbar>
+          Request Custom Order
+        </Button>
+      </Col>
+    </Row>
   </div>
 )
 

@@ -10,6 +10,9 @@
 
     .filters {
       padding: 15px 0;
+      @media (max-width: $screen-xs-max) {
+        text-align: center;
+      }
       button {
         &:last-child {
           float: right;

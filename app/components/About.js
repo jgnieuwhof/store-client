@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-import Page from './Page'
+import Page, { BodyImg } from './Page'
 import about from '../img/content/about.jpg'
 
 let About = () => {
@@ -14,9 +14,7 @@ let About = () => {
         <p>
           Duis et fringilla elit. Quisque dictum nibh sed nunc pulvinar, vitae aliquet arcu iaculis. Nunc faucibus nunc vitae auctor viverra. Nunc lobortis scelerisque nibh et condimentum. In non diam sodales justo aliquam imperdiet. Maecenas tempor magna vel felis egestas, aliquet ornare odio sagittis. Aliquam ut ligula at metus egestas hendrerit cursus cursus justo. Phasellus non ipsum tortor. Phasellus in tortor ac purus efficitur consequat vel auctor mi. Nam elit lacus, consequat vel aliquam in, rutrum sit amet massa. Suspendisse mi massa, aliquet nec nisi eget, euismod elementum metus. Nam consectetur ligula in libero posuere, quis fermentum magna elementum. Nunc eget lectus quis ligula iaculis hendrerit. Vivamus a rutrum neque.
         </p>
-        <p className='center-content'>
-          <img src={about} className='img-responsive' style={{ maxWidth: 500 }} />
-        </p>
+        <BodyImg src={about} />
       </div>
     </Page>
   )

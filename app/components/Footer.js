@@ -11,7 +11,7 @@ export default () => {
         <Row>
           <Col xs={6} sm={3}>
             <p><Link to='/about'>About</Link></p>
-            <p><Link to='/request'>Request Custom Order</Link></p>
+            <p><Link to='/contact/customOrderRequest'>Request Custom Order</Link></p>
             <p><Link to='/events'>Upcoming Events</Link></p>
           </Col>
           <Col xs={6} sm={3} style={{ marginBottom: 20 }}>
@@ -26,6 +26,9 @@ export default () => {
             <JoinNewsletter />
           </Col>
         </Row>
+        <div className='text-center text-gray-light'>
+          <span>&copy; Ramble On Silver Co.</span>
+        </div>
       </Grid>
     </div>
   )
