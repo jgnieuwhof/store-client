@@ -69,6 +69,11 @@ class Contact extends Component {
     return validation
   }
 
+  componentWillReceiveProps = ({ params: { reason } }) => {
+    if (reason && reasons[reason] && this.state.reason !== reason)
+      this.setReason(reason)
+  }
+
   submit = async () => {
     this.setState({ loading: true })
     let { form, state: { reason } } = this

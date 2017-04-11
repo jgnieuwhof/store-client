@@ -19,7 +19,9 @@ const ProductThumbnail = ({ product, router }) => {
         src={product.images[0].src}
       >
         <span className={`title text-center showguide ${titleClass}`}>
-          <h2><span>{ soldOut ? `SOLD OUT` : product.title }</span></h2>
+          <h2 style={{ margin: 0 }}>
+            <span>{ soldOut ? `SOLD OUT` : product.title }</span>
+          </h2>
         </span>
         { showMeta && (
           <span className='meta'>

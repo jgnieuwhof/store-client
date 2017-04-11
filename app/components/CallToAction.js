@@ -4,9 +4,9 @@ import { Row, Col, Button } from 'react-bootstrap'
 import FontAwesome from 'react-fontawesome'
 import { withRouter } from 'react-router'
 
-let CallToAction = ({ className, onClick, disabled, title, router }) => (
+let CallToAction = ({ large, className, onClick, disabled, title, router }) => (
   <Row className={`action-buttons ${className || ``}`}>
-    <Col xs={12} sm={3} smOffset={9}>
+    <Col xs={12} sm={large ? 6 : 3} smOffset={large ? 6 : 9}>
       <Button block bsSize='large' bsStyle='primary' onClick={onClick} disabled={disabled}>
         {title}
       </Button>

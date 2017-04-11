@@ -3,26 +3,35 @@
 // Product Detail
 // ============================================================================
 .product-detail {
+  .page-header-klass {
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 40px;
+    }
+  }
   .thumbnails {
-    margin-top: 40px;
+    margin-top: 28px;
     @media (min-width: $screen-xs-min) {
-      margin-top: 20px;
-      padding: 20px 20px 0 20px;
+      margin-top: 28px;
+      padding: 10px 10px 0 10px;
       border-top: 2px solid $gray-light;
       border-bottom: 2px solid $gray-light;
     }
     .thumbnail {
       cursor: pointer;
+      margin-bottom: 10px;
     }
   }
   .description {
     font-size: 18px;
   }
+  .carousel-indicators {
+    display: none;
+  }
+  .carousel-control {
+    width: 8%;
+    color: black;
+  }
   .carousel-inner, .carousel-control {
     background: transparent;
-    color: $gray-dark;
-    img {
-      max-height: 400px !important;
-    }
   }
 }

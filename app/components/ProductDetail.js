@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Thumbnail } from 'react-bootstrap'
+import { Row, Col, Thumbnail, Carousel } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 
@@ -57,38 +57,54 @@ class ProductDetail extends Component {
       add = true
       actionText = `ADD TO CART`
     }
+    let thumbnailArrays = []
+    let images = product.images.slice(0)
+    while (images.length > 0)
+      thumbnailArrays.push(images.splice(0, 4))
     return (
       <div className='product-detail fadein'>
         <PageHeader title={product.title} />
-        <Row className='feature-image center-content top-buffer'>
-          <img
-            style={{ maxHeight: 300 }}
-            className='img-responsive'
-            src={ featureImage || product.images[0].src }
-          />
-        </Row>
-        <Row className='thumbnails center-content'>
-          { product.images.map(({ src }, i) => (
-            <Col key={i} xs={4} sm={2}>
-              <Thumbnail
-                src={src}
-                onClick={() => this.setState({ featureImage: src })}
+        <Row>
+          <Col sm={6}>
+            <Row className='feature-image center-content'>
+              <img
+                style={{ height: 400 }}
+                className='img-responsive'
+                src={ featureImage || product.images[0].src }
               />
-            </Col>
-          ))}
-        </Row>
-        <Row className='top-buffer'>
-          <Col md={12} className='description'>
-            <div dangerouslySetInnerHTML={this.descriptionHTML(product.description)} />
-            <p><strong>Price: {product.variant.formattedPrice}</strong></p>
+            </Row>
+            <Carousel className='thumbnails center-content'>
+              { thumbnailArrays.map((images, i) => (
+                <Carousel.Item key={i}>
+                  <Row>
+                    { images.map(({ src }) => (
+                      <Col key={src} xs={3}>
+                        <Thumbnail
+                          src={src}
+                          onClick={() => this.setState({ featureImage: src })}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                </Carousel.Item>
+                ))}
+            </Carousel>
+          </Col>
+          <Col sm={6}>
+            <Row>
+              <Col md={12} className='description'>
+                <div dangerouslySetInnerHTML={this.descriptionHTML(product.description)} />
+                <p><strong>Price: {product.variant.formattedPrice}</strong></p>
+              </Col>
+            </Row>
+            <div className='top-buffer hidden-md hidden-lg' />
+            <CallToAction large
+              onClick={() => {this.addProductToCartHandler(add)}}
+              disabled={disabled}
+              title={actionText}
+            />
           </Col>
         </Row>
-        <div className='top-buffer hidden-md hidden-lg' />
-        <CallToAction
-          onClick={() => {this.addProductToCartHandler(add)}}
-          disabled={disabled}
-          title={actionText}
-        />
       </div>
     )
   }
