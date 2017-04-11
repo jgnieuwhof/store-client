@@ -3,20 +3,21 @@ import { Grid } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 
 import Gun from './icons/Gun'
+import { daysBetween } from '../helpers/date'
 import { lsSet, lsGet } from '../helpers/localStorage'
 import splashImage from '../img/content/splash.jpg'
 
-const VERSION = `1` // Increment to force users to view the splash
 
 class Splash extends Component {
   componentWillMount = () => {
-    if (lsGet(`version`) === VERSION) {
+    let visited = lsGet(`visited`)
+    if (visited && daysBetween(Date.now(), visited) <= 1) {
       this.props.router.push(`/store`)
     }
   }
 
   enterSite = () => {
-    lsSet(`version`, VERSION)
+    lsSet(`visited`, Date.now())
     this.props.router.push(`/store`)
   }
 
