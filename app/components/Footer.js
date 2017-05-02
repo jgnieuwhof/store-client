@@ -28,7 +28,7 @@ export default () => {
       </Grid>
       <div
         className='text-center text-gray-light'
-        style={{ position: `absolute`, left: 0, right: 0, bottom: 25 }}
+        style={{ position: `absolute`, left: 0, right: 0, bottom: 45 }}
       >
         <span>&copy; Ramble On Silver Co.</span>
       </div>

@@ -10,13 +10,13 @@ export default () => {
   return (
     <Carousel className='store-carousel'>
       <Carousel.Item>
-        <img width={1140} height={600} src={img1} />
+        <img width={1140} height={300} src={img1} />
       </Carousel.Item>
       <Carousel.Item>
-        <img width={1140} height={600} src={img2} />
+        <img width={1140} height={300} src={img2} />
       </Carousel.Item>
       <Carousel.Item>
-        <img width={1140} height={600} src={img3} />
+        <img width={1140} height={300} src={img3} />
       </Carousel.Item>
     </Carousel>
   )

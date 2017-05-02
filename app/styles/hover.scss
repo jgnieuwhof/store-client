@@ -1,6 +1,10 @@
 
 .with-hover {
-  .store-items .caption .title:hover {
-    opacity: 1 !important;
+  .store-items .caption {
+    &:hover {
+      .title, .meta {
+        opacity: 1 !important;
+      }
+    }
   }
 }

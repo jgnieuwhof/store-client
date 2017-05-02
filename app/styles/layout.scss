@@ -5,7 +5,7 @@ $base-spacing: 30px;
 html,
 body {
   height: 100%;
-  background: $body-bg;
+  background: black;
   user-select: none;
 }
 
@@ -24,6 +24,12 @@ html, body, a, button, .btn {
 
 .checkbox-inline {
   margin-left: 10px;
+}
+
+@media (min-width: 1200px) {
+  .container{
+    max-width: 970px;
+  }
 }
 
 // ============================================================================
@@ -85,6 +91,7 @@ $xs-footer-height: 480px;
 
 .app-container {
   position: relative;
+  background: white;
   min-height: 100vh;
   padding-bottom: $footer-height;
   @media(max-width: $screen-xs-max) {
