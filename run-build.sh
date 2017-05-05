@@ -26,7 +26,7 @@ else
   echo "Building with API_URL = $API_URL"
   printf "$RESET"
   echo "⌛ Preparing to build... (this should take a couple of minutes)"
-  API_URL="\"$API_URL\"" NODE_ENV=production webpack -p --config webpack.production.config.js
+  API_URL="\"$API_URL\"" MODE="\"$MODE\"" NODE_ENV=production webpack -p --config webpack.production.config.js
   echo "New Build complete."
   echo "Clearing old build..."
   rm -rf dist
