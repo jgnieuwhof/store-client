@@ -10,7 +10,6 @@
   }
 
   .feature-text {
-    padding-top: 100px;
     h1, h2, h3 {
       font-family: western;
       line-height: 0.8;
@@ -26,12 +25,15 @@
       font-size: 70px;
       margin: 0;
     }
+    @media(max-width: $screen-xs-max) {
+      h1, h2 { font-size: 80px; }
+      h3 { font-size: 60px; }
+    }
   }
 
   .newsletter-container {
     font-family: bebas;
     font-size: 20px;
-    padding-bottom: 50px;
     .email-form {
       @media(min-width: $screen-sm-min) {
         display: inline-block;
