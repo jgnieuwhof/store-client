@@ -42,7 +42,7 @@ window.onload = () => {
           onUpdate={() => window.scrollTo(0, 0)}
           history={browserHistory}
         >
-          { Routes }
+          { Routes() }
         </Router>
       </ShopifyProvider>
     </Provider>,

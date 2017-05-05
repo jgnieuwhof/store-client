@@ -9,6 +9,24 @@ $headings-font-family: Roboto, $font-family-sans-serif;
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'bebas';
+  src: url('styles/fonts/bebas/bebas.woff2') format('woff2'),
+       url('styles/fonts/bebas/bebas.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'western';
+  src: url('styles/fonts/western/western.woff2') format('woff2'),
+       url('styles/fonts/western/western.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: 2px;
+  line-height: 0.7;
+}
+
 a {
   cursor: pointer;
   &:hover, &:active {
