@@ -10,5 +10,17 @@
        "NODE_ENV": "production",
        "PORT": 3001
     }
+  }, {
+    "name"        : "store-client-maintenance",
+    "script"      : "server.prod.js",
+    "args"        : [],
+    "watch"       : true,
+    "node_args"   : "",
+    "cwd"         : "/home/store/store-client-maintenance/",
+    "env_production" : {
+       "NODE_ENV": "production",
+       "MODE": "maintenance",
+       "PORT": 3003
+    }
   }]
 }
