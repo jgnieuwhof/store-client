@@ -1,7 +1,9 @@
 
 import ReactGA from 'react-ga'
 
-ReactGA.initialize(`UA-000000-01`)
+import { analytics } from '../app.config'
+
+ReactGA.initialize(analytics)
 
 export const logPageView = () => {
   ReactGA.set({ page: window.location.pathname + window.location.search })
