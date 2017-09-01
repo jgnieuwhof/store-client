@@ -14,26 +14,25 @@ import Store from './Store'
 
 const mode = `${process.env.MODE}`
 
-export default () => {
-  if (mode === `maintenance`) {
-    return (
-      <Route path="/" component={Site}>
-        <IndexRoute component={ComingSoon} />
-        <Route path="*" component={ComingSoon} />
-      </Route>
-    )
-  }
-  return (
-    <Route path="/" component={Site}>
-      <IndexRoute component={Splash} />
-      <Route path="/" component={App}>
-        <Route path="store" component={Store} maximize />
-        <Route path="product/:id" component={ProductDetail} />
-        <Route path="about" component={About} />
-        <Route path="contact(/:reason)" component={Contact} />
-        <Route path="cart" component={Cart} />
-      </Route>
-      <Route path="*" component={Error404} />
+const Maintenance = () => (
+  <Route path="/" component={Site}>
+    <IndexRoute component={ComingSoon} />
+    <Route path="*" component={ComingSoon} />
+  </Route>
+)
+
+const Other = () => (
+  <Route path="/" component={Site}>
+    <IndexRoute component={Splash} />
+    <Route path="/" component={App}>
+      <Route path="store" component={Store} maximize />
+      <Route path="product/:id" component={ProductDetail} />
+      <Route path="about" component={About} />
+      <Route path="contact(/:reason)" component={Contact} />
+      <Route path="cart" component={Cart} />
     </Route>
-  )
-}
+    <Route path="*" component={Error404} />
+  </Route>
+)
+
+export default mode === `maintenance` ? Maintenance : Other

@@ -12,6 +12,7 @@ import thunk from 'redux-thunk'
 import ShopifyBuy from 'shopify-buy'
 
 import appConfig from './app.config'
+import { logPageView } from './helpers/analytics'
 import Routes from './components/Routes'
 import ShopifyProvider from './components/ShopifyProvider'
 import finalReducer from './reducers/reduce'
@@ -32,6 +33,11 @@ const finalCreateStore = compose(
 
 const STORE = finalCreateStore(finalReducer)
 
+const onUpdate = () => {
+  window.scrollTo(0, 0)
+  logPageView()
+}
+
 window.onload = () => {
   let root = document.createElement(`div`)
   document.body.appendChild(root)
@@ -39,7 +45,7 @@ window.onload = () => {
     <Provider store={STORE}>
       <ShopifyProvider shopify={SHOPIFY}>
         <Router
-          onUpdate={() => window.scrollTo(0, 0)}
+          onUpdate={onUpdate}
           history={browserHistory}
         >
           { Routes() }
