@@ -6,14 +6,21 @@
     "watch"       : true,
     "node_args"   : "",
     "cwd"         : "/home/store/store-client/",
-    "env_production" : {
-       "NODE_ENV": "production",
-       "PORT": 3001
-    },
-    "env_maintenance" : {
+    "env" : {
       "NODE_ENV": "production",
       "MODE": "maintenance",
       "PORT": 3003
+    }
+  }, {
+    "name"        : "store-client-dev",
+    "script"      : "server.prod.js",
+    "args"        : [],
+    "watch"       : true,
+    "node_args"   : "",
+    "cwd"         : "/home/store/store-client-dev/",
+    "env" : {
+      "NODE_ENV": "production",
+      "PORT": 3001
     }
   }]
 }
