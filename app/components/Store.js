@@ -78,7 +78,7 @@ class Store extends Component {
     }
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.updateProducts(this.props)
   }
 

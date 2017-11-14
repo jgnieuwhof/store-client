@@ -31,7 +31,7 @@ class JoinNewsletter extends Component {
   }
 
   render = () => {
-    let { children } = this.props
+    let { children, hideLabel } = this.props
     let { email, message } = this.state
     let joined = !!email
     return (
@@ -39,7 +39,7 @@ class JoinNewsletter extends Component {
         { joined && <strong>Subscribed to mailing list as {email}</strong> }
         { !joined &&
           <div>
-            { children && children || <p>Join the Mailing List</p> }
+            { !hideLabel && (children || <p>Join the Mailing List</p>) }
             <Form inline className='email-form' onSubmit={this.join} onClick={this.close}>
               <div style={{ position: `relative` }}>
                 { !!message &&

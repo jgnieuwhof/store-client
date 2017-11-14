@@ -8,6 +8,7 @@ import ComingSoon from './ComingSoon'
 import Contact from './Contact'
 import Error404 from './Error404'
 import ProductDetail from './ProductDetail'
+import Signup from './Signup'
 import Site from './Site'
 import Splash from './Splash'
 import Store from './Store'
@@ -30,6 +31,7 @@ const Other = () => (
       <Route path="about" component={About} />
       <Route path="contact(/:reason)" component={Contact} />
       <Route path="cart" component={Cart} />
+      <Route path="signup" component={Signup} />
     </Route>
     <Route path="*" component={Error404} />
   </Route>

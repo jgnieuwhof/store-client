@@ -26,7 +26,8 @@ let Header = () => {
             <NavItem eventKey={3} href="/contact">Contact</NavItem>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={4} href="/cart">
+            <NavItem eventKey={4} href="/signup">Sign Up</NavItem>
+            <NavItem eventKey={5} href="/cart">
               <CartBadge />
             </NavItem>
           </Nav>

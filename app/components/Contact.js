@@ -157,14 +157,12 @@ class Contact extends Component {
                       }}
                       validationState={validation.trackingNumber}
                     />
-                    <FieldGroup name='inquiry' componentClass='textarea' label='Inquiry'
-                      placeholder='Inquiry ...'
-                      onChange={() => { this.validateField(`inquiry`, isValidNote) }}
-                      validationState={validation.inquiry}
-                    />
                   </div>
                 )}
-                <FieldGroup name='note' componentClass='textarea' label='Inquiry'
+                <FieldGroup
+                  name='note'
+                  componentClass='textarea'
+                  label={reason === reasons.customOrderRequest ? `Anything Else?` : `Inquiry` }
                   placeholder='Questions, Comments, ...'
                   onChange={() => { this.validateField(`note`, isValidNote) }}
                   validationState={validation.note}
