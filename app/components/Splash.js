@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
-import { withRouter } from 'react-router'
+import { browserHistory } from 'react-router'
 
 import Gun from './icons/Gun'
 import { daysBetween } from '../helpers/date'
@@ -11,14 +11,13 @@ import splashImage from '../img/content/splash.jpg'
 class Splash extends Component {
   componentWillMount = () => {
     let visited = lsGet(`visited`)
-    if (visited && daysBetween(Date.now(), visited) <= 1) {
-      this.props.router.push(`/store`)
-    }
+    if (visited && daysBetween(Date.now(), visited) <= 1)
+      browserHistory.push(`/store`)
   }
 
   enterSite = () => {
     lsSet(`visited`, Date.now())
-    this.props.router.push(`/store`)
+    browserHistory.push(`/store`)
   }
 
   render = () => {
@@ -37,4 +36,4 @@ class Splash extends Component {
   }
 }
 
-export default withRouter(Splash)
+export default Splash

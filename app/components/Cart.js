@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Row, Col, Thumbnail } from 'react-bootstrap'
-import { withRouter } from 'react-router'
+import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 
@@ -14,15 +14,14 @@ class Cart extends Component {
   }
 
   productClick = (productId) => {
-    this.props.router.push(`/product/${productId}`)
+    browserHistory.push(`/product/${productId}`)
   }
 
   removeItem = async (listItemId) => {
-    let { dispatch, router } = this.props
+    let { dispatch } = this.props
     await dispatch(removeItemFromCart({ id: listItemId }))
-    if (this.props.cart.lineItems.length === 0) {
-      router.push(`/store`)
-    }
+    if (this.props.cart.lineItems.length === 0)
+      browserHistory.push(`/store`)
   }
 
   render = () => {
@@ -75,6 +74,6 @@ class Cart extends Component {
   }
 }
 
-export default withRouter(connect(state => ({
+export default connect(state => ({
   cart: state.cart,
-}))(Cart))
+}))(Cart)

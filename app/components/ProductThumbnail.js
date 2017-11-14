@@ -1,9 +1,9 @@
 
 import React from 'react'
 import { Col, Thumbnail } from 'react-bootstrap'
-import { withRouter } from 'react-router'
+import { browserHistory } from 'react-router'
 
-const ProductThumbnail = ({ product, router }) => {
+const ProductThumbnail = ({ product }) => {
   let soldOut = !product.variant.available
   let titleClass = `${soldOut ? `sold-out` : ``}`
   return (
@@ -14,7 +14,7 @@ const ProductThumbnail = ({ product, router }) => {
     >
       <Thumbnail
         className='store-thumbnail'
-        onClick={() => { router.push(`/product/${product.id}`) }}
+        onClick={() => { browserHistory.push(`/product/${product.id}`) }}
         src={product.images[0].src}
       >
         <span className={`title text-center showguide ${titleClass}`}>
@@ -27,4 +27,4 @@ const ProductThumbnail = ({ product, router }) => {
   )
 }
 
-export default withRouter(ProductThumbnail)
+export default ProductThumbnail

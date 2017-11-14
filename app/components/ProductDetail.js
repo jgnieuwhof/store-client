@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Thumbnail, Carousel } from 'react-bootstrap'
-import { withRouter } from 'react-router'
+import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 import CallToAction from './CallToAction'
@@ -8,6 +8,12 @@ import Loading from './Loading'
 import PageHeader from './PageHeader'
 import { addVariantToCart } from '../reducers/reduceCart'
 import { fetchProduct } from '../reducers/reduceShop'
+
+let Price = ({ price }) => (
+  <p className='price'>
+    <strong>Price: {price}</strong>
+  </p>
+)
 
 class ProductDetail extends Component {
   state = {
@@ -30,18 +36,17 @@ class ProductDetail extends Component {
   })
 
   addProductToCartHandler = (add) => {
-    let { dispatch, router } = this.props
+    let { dispatch } = this.props
     let { variant } = this.product()
-    if (add) {
+    if (add)
       dispatch(addVariantToCart({ variant }))
-    }
-    router.push(`/cart`)
+    browserHistory.push(`/cart`)
   }
 
   render = () => {
     let actionText, disabled = false, add = false
     let { featureImage } = this.state
-    let { products, lineItems, params: { id }, router } = this.props
+    let { products, lineItems, params: { id } } = this.props
     let product = products[+id]
     let isSoldOut = product && !product.variant.available
     if (!product) {
@@ -98,7 +103,10 @@ class ProductDetail extends Component {
                   <p>
                     This item has sold.
                     If you'd like something similar click
-                    <a onClick={() => { router.push(`/contact/customOrderRequest`) }}> here </a>
+                    <a onClick={() => {
+                      browserHistory.push(`/contact/customOrderRequest`)
+                    }}
+                    > here </a>
                      and request a custom order.
                   </p>
                 )}
@@ -110,10 +118,8 @@ class ProductDetail extends Component {
               </Col>
             </Row>
             <div className='top-buffer'>
-              <p className='pull-right'>
-                <strong>Price: {product.variant.formattedPrice}</strong>
-              </p>
               <CallToAction large
+                customContent={<Price price={product.variant.formattedPrice} />}
                 onClick={() => {this.addProductToCartHandler(add)}}
                 disabled={disabled}
                 title={actionText}
@@ -130,7 +136,7 @@ ProductDetail.contextTypes = {
   shopify: React.PropTypes.object,
 }
 
-export default withRouter(connect(state => ({
+export default connect(state => ({
   lineItems: state.cart.lineItems,
   products: state.shop.products,
-}))(ProductDetail))
+}))(ProductDetail)
