@@ -56,9 +56,12 @@ class Store extends Component {
   updateProducts = ({ products: productHash }) => {
     let products = productArray(productHash)
     if (products) {
-      let types = products.reduce((arr, { type }) => (
-        arr.includes(type) ? arr : [ ...arr, type ]
-      ), [])
+      let types = products
+        .filter(({ type }) => (type !== null && type.trim() !== ``))
+        .map(({ type }) => (type.trim()))
+        .reduce((arr, type) => (
+          arr.includes(type) ? arr : [ ...arr, type ]
+        ), [])
       products.sort((p1, p2) => (
         p1.variant.available && p2.variant.available ? 0 : (p1.variant.available ? -1 : 1)
       ))

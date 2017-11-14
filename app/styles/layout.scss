@@ -10,7 +10,7 @@ body {
 }
 
 html, body, a, button, .btn {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 // ============================================================================
@@ -190,6 +190,7 @@ button {
 }
 
 .action-buttons {
+  position: relative;
   button {
     border-radius: 0px;
     &.btn-primary {
@@ -199,6 +200,12 @@ button {
     @media(max-width: $screen-xs-max) {
       width: 100%;
       margin-bottom: 10px;
+    }
+  }
+
+  .back {
+    @media(min-width: $screen-md-min) {
+      position: absolute;
     }
   }
 }

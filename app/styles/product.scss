@@ -23,6 +23,8 @@
   }
   .description {
     font-size: 18px;
+    overflow: scroll;
+    height: 400px;
   }
   .carousel-indicators {
     display: none;

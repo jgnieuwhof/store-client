@@ -1,5 +1,4 @@
-$headings-font-family: Roboto, $font-family-sans-serif;
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,700);
+@import url(https://fonts.googleapis.com/css?family=Barlow);
 
 @font-face {
   font-family: 'showguide';
@@ -31,6 +30,12 @@ a {
   cursor: pointer;
   &:hover, &:active {
     text-decoration: none;
+  }
+}
+
+p {
+  a {
+    color: 'darkred';
   }
 }
 

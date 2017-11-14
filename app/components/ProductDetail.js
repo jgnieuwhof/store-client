@@ -41,12 +41,13 @@ class ProductDetail extends Component {
   render = () => {
     let actionText, disabled = false, add = false
     let { featureImage } = this.state
-    let { products, lineItems, params: { id } } = this.props
+    let { products, lineItems, params: { id }, router } = this.props
     let product = products[+id]
+    let isSoldOut = product && !product.variant.available
     if (!product) {
       return <Loading size='5x' />
     }
-    if (!product.variant.available) {
+    if (isSoldOut) {
       disabled = true
       actionText = `SOLD OUT`
     }
@@ -93,16 +94,31 @@ class ProductDetail extends Component {
           <Col sm={6}>
             <Row>
               <Col md={12} className='description'>
-                <div dangerouslySetInnerHTML={this.descriptionHTML(product.description)} />
-                <p><strong>Price: {product.variant.formattedPrice}</strong></p>
+                { isSoldOut && (
+                  <p>
+                    This item has sold.
+                    If you'd like something similar click
+                    <a onClick={() => { router.push(`/contact/customOrderRequest`) }}> here </a>
+                     and request a custom order.
+                  </p>
+                )}
+                { !isSoldOut && (
+                  <div
+                    dangerouslySetInnerHTML={this.descriptionHTML(product.description)}
+                  />
+                )}
               </Col>
             </Row>
-            <div className='top-buffer hidden-md hidden-lg' />
-            <CallToAction large
-              onClick={() => {this.addProductToCartHandler(add)}}
-              disabled={disabled}
-              title={actionText}
-            />
+            <div className='top-buffer'>
+              <p className='pull-right'>
+                <strong>Price: {product.variant.formattedPrice}</strong>
+              </p>
+              <CallToAction large
+                onClick={() => {this.addProductToCartHandler(add)}}
+                disabled={disabled}
+                title={actionText}
+              />
+            </div>
           </Col>
         </Row>
       </div>

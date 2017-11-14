@@ -164,7 +164,7 @@ class Contact extends Component {
                     />
                   </div>
                 )}
-                <FieldGroup name='note' componentClass='textarea' label='Anything Else?'
+                <FieldGroup name='note' componentClass='textarea' label='Inquiry'
                   placeholder='Questions, Comments, ...'
                   onChange={() => { this.validateField(`note`, isValidNote) }}
                   validationState={validation.note}

@@ -11,7 +11,7 @@ let CallToAction = ({ large, className, onClick, disabled, title, router }) => (
         {title}
       </Button>
     </Col>
-    <Col xs={12} sm={3}>
+    <Col xs={12} sm={3} className='back'>
       <Button className='naked' onClick={() => { router.push(`/store`) }}>
         <FontAwesome name='arrow-left' />
         <span>Store</span>

@@ -28,36 +28,42 @@ class Cart extends Component {
   render = () => {
     let { cart } = this.props
     let { lineItems } = cart
+    let hasLineItems = lineItems && lineItems.length > 0
     return (
       <div className='cart'>
         <PageHeader title='My Cart' />
-        <div className='line-items top-buffer'>
-          { lineItems.map(lineItem => {
-            let price = (lineItem.line_price * lineItem.quantity).toFixed(2)
-            return (
-              <Row key={lineItem.id}>
-                <Col xs={4} sm={2}>
-                  <Thumbnail
-                    onClick={() => { this.productClick(lineItem.product_id) }}
-                    src={lineItem.image.src}
-                  />
-                </Col>
-                <Col sm={8}>
-                  <a onClick={() => { this.productClick(lineItem.product_id) }}>
-                    <h4>{lineItem.title}</h4>
-                    <span>{`// Price: $${price}`}</span>
-                  </a>
-                </Col>
-                <Col xs={12} sm={2} className='action-buttons'>
-                  <Button onClick={() => { this.removeItem(lineItem.id)}}>
-                    <FontAwesome name='times' />
-                    <span>Remove</span>
-                  </Button>
-                </Col>
-              </Row>
-            )
-          })}
-        </div>
+        { !hasLineItems && <div>There's nothing here!</div>}
+        { hasLineItems && (
+          <div>
+            <div className='line-items top-buffer'>
+              { hasLineItems && lineItems.length && lineItems.map(lineItem => {
+                let price = (lineItem.line_price * lineItem.quantity).toFixed(2)
+                return (
+                  <Row key={lineItem.id}>
+                    <Col xs={4} sm={2}>
+                      <Thumbnail
+                        onClick={() => { this.productClick(lineItem.product_id) }}
+                        src={lineItem.image.src}
+                      />
+                    </Col>
+                    <Col sm={8}>
+                      <a onClick={() => { this.productClick(lineItem.product_id) }}>
+                        <h4>{lineItem.title}</h4>
+                        <span>{`// Price: $${price}`}</span>
+                      </a>
+                    </Col>
+                    <Col xs={12} sm={2} className='action-buttons'>
+                      <Button onClick={() => { this.removeItem(lineItem.id)}}>
+                        <FontAwesome name='times' />
+                        <span>Remove</span>
+                      </Button>
+                    </Col>
+                  </Row>
+                )
+              })}
+            </div>
+          </div>
+        )}
         <CallToAction
           className='top-buffer'
           onClick={this.checkout}

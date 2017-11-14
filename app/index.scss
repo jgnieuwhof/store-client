@@ -72,8 +72,10 @@ $icon-font-path: "./../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 // ============================================================================
 // Custom Styles.
 // ============================================================================
+
 // Utilities with variable definitions that have to go first
 @import './styles/font.scss';
+
 // Everything else second
 @import './styles/layout.scss';
 @import './styles/store.scss';
@@ -84,3 +86,4 @@ $icon-font-path: "./../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 @import './styles/page.scss';
 @import './styles/contact.scss';
 @import './styles/comingSoon.scss';
+@import './styles/header.scss';
