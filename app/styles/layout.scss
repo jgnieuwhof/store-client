@@ -85,6 +85,7 @@ $footer-height: 270px;
 $xs-footer-height: 480px;
 
 .body {
+  margin-top: 51px;
   margin-bottom: $base-spacing;
   min-height: calc(100vh - $footer-height);
 }

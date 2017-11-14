@@ -3,8 +3,6 @@ import React from 'react'
 import {
   Navbar,
   Nav,
-  NavDropdown,
-  MenuItem,
 } from 'react-bootstrap'
 import { Link } from 'react-router'
 
@@ -14,7 +12,7 @@ import NavItem from './NavItem'
 let Header = () => {
   return (
     <div className="header-container">
-      <Navbar inverse>
+      <Navbar inverse fixedTop>
         <Navbar.Header>
           <Navbar.Brand className='showguide'>
             <Link to="/store"><span>RAMBLE ON</span></Link>
