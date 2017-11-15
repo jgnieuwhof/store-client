@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {
   Checkbox, Col, ControlLabel, Button, ButtonGroup,
-  DropdownButton, FormGroup, MenuItem,
+  DropdownButton, FormGroup, MenuItem, FormControl,
+  Radio,
 } from 'react-bootstrap'
 import u from 'updeep'
 
@@ -9,7 +10,7 @@ import FieldGroup from './FieldGroup'
 import Page from './Page'
 
 import api from '../helpers/api'
-import { formValues } from '../helpers/form'
+import { verifyImage, formValues } from '../helpers/form'
 import {
   isValidName, isValidEmail,
   isValidNote, isValidTrackingNumber,
@@ -40,12 +41,23 @@ const isFormValid = ({ form, state }) => {
   )
 }
 
+let TypeCheckbox = ({ name, onChange }) => (
+  <span>
+    <Checkbox name={`types[${name.toLowerCase()}]`} inline onChange={onChange}>
+      {name}
+    </Checkbox>
+    {` `}
+  </span>
+)
+
 class Contact extends Component {
   state = {
     reason: reasons.generalInquiry,
     loading: false,
     success: false,
     validation: {},
+    types: [],
+    similarPhoto: null,
   }
 
   componentWillMount = () => {
@@ -58,14 +70,16 @@ class Contact extends Component {
     this.setState({ reason: reasons[reason] })
   }
 
+  setValidationField = ({ field, validation }) => {
+    this.setState({
+      validation: u({ [field]: validation }, this.state.validation),
+    })
+  }
+
   validateField = (field, validator, setState = true) => {
     let { [field]: { value } } = this.form
     let validation = validator(value)
-    if (setState) {
-      this.setState({
-        validation: u({ [field]: validation }, this.state.validation),
-      })
-    }
+    if (setState) this.setValidationField({ field, validation })
     return validation
   }
 
@@ -74,23 +88,42 @@ class Contact extends Component {
       this.setReason(reason)
   }
 
+  onTypeChange = (e) => {
+    let { checked, name } = e.target
+    let { types } = this.state
+    if (checked)
+      types[name] = true
+    else if (types[name])
+      delete types[name]
+    this.setState({ types })
+  }
+
+  onSimilarPhotoUrlChange = async e => {
+    let { value: url } = e.target
+    let imgReg = /\.(jpeg|jpg|gif|png)$/
+    let img = (url.match(imgReg) !== null) && (await verifyImage({ url }))
+    this.setState({ similarPhoto: img || null })
+    this.setValidationField({
+      field: `similarPhoto`,
+      validation: img ? `success` : `error`,
+    })
+  }
+
   submit = async () => {
     this.setState({ loading: true })
-    let { form, state: { reason } } = this
-    let { success, message } = await api(`contact`, {
-      ...formValues(form),
-      reason,
-    })
-    if (success) {
-      message = null
-    }
+    let { form, state: { reason, similarPhoto } } = this
+    let fv = formValues(form)
+    if (!similarPhoto) delete fv.similarPhotoUrl
+    let { success, message } = await api(`contact`, { ...fv, reason })
+    if (success) message = null
     this.setState({ success, validationMessage: message, loading: false })
   }
 
   render = () => {
     let { form, state } = this
     let valid = isFormValid({ form, state })
-    let { success, loading, validationMessage, reason, validation } = state
+    let { success, loading, validationMessage, reason, validation, similarPhoto } = state
+    let isRing = !!state.types[`types[ring]`]
     return (
       <Page title='Contact Us' className='contact-container'>
         { (success && (
@@ -135,17 +168,51 @@ class Contact extends Component {
                     <FormGroup>
                       <ControlLabel>Custom Piece Type</ControlLabel>
                       <div>
-                        <Checkbox name='types[ring]' inline>Ring</Checkbox>{` `}
-                        <Checkbox name='types[necklace]' inline>Necklace</Checkbox>{` `}
-                        <Checkbox name='types[bracelet]' inline>Bracelet</Checkbox>{` `}
-                        <Checkbox name='types[other]' inline>Other</Checkbox>
+                        { [`Ring`, `Necklace`, `Bracelet`, `Other`].map((x) => (
+                          <TypeCheckbox key={x} name={x} onChange={this.onTypeChange} />
+                        ))}
                       </div>
                     </FormGroup>
+                    { isRing && (
+                      <div>
+                        <FormGroup>
+                          <ControlLabel>Ring Size (US)</ControlLabel>
+                          <FormControl componentClass='select'>
+                            { [...Array(17)].map((_a, i, _b, j = (i / 2) + 4) => (
+                              <option key={i} value={j}>{j}</option>
+                            ))}
+                          </FormControl>
+                        </FormGroup>
+                        <FormGroup>
+                          <ControlLabel>Style</ControlLabel>
+                          <div>
+                            { [`Single Stone`, `Multiple Stone`].map((x, i) => (
+                              <Radio key={x} name='ringStyle' inline
+                                defaultChecked={!i}
+                              >{x}</Radio>
+                            ))}
+                          </div>
+                        </FormGroup>
+                      </div>
+                    )}
                     <FieldGroup name='description' componentClass='textarea' label='Description *'
                       placeholder='Style, similar items, size, ...'
                       onChange={() => { this.validateField(`description`, isValidNote) }}
                       validationState={validation.description}
                     />
+                    <FormGroup>
+                      <FieldGroup name='similarPhotoUrl' type='text'
+                        label='Similar Photo URL'
+                        placeholder='Paste a URL to an image here'
+                        onChange={this.onSimilarPhotoUrlChange}
+                        validationState={validation.similarPhoto}
+                      />
+                      { similarPhoto && (
+                        <div className='text-center'>
+                          <img className='similar-photo' src={similarPhoto.src} />
+                        </div>
+                      )}
+                    </FormGroup>
                   </div>
                 )}
                 { reason === reasons.shippingInquiry && (
