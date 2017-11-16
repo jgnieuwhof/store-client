@@ -58,6 +58,7 @@ class Contact extends Component {
     validation: {},
     types: [],
     similarPhoto: null,
+    price: null,
   }
 
   componentWillMount = () => {
@@ -109,6 +110,10 @@ class Contact extends Component {
     })
   }
 
+  onPriceRangeChange = e => {
+    this.setState({ price: e.target.value })
+  }
+
   submit = async () => {
     this.setState({ loading: true })
     let { form, state: { reason, similarPhoto } } = this
@@ -122,7 +127,10 @@ class Contact extends Component {
   render = () => {
     let { form, state } = this
     let valid = isFormValid({ form, state })
-    let { success, loading, validationMessage, reason, validation, similarPhoto } = state
+    let {
+      success, loading, validationMessage,
+      reason, validation, similarPhoto, price,
+    } = state
     let isRing = !!state.types[`types[ring]`]
     return (
       <Page title='Contact Us' className='contact-container'>
@@ -188,8 +196,7 @@ class Contact extends Component {
                           <div>
                             { [`Single Stone`, `Multiple Stone`].map((x, i) => (
                               <Radio key={x} inline
-                                name='ringStyle'
-                                value={x}
+                                name='ringStyle' value={x}
                                 defaultChecked={!i}
                               >{x}</Radio>
                             ))}
@@ -214,6 +221,13 @@ class Contact extends Component {
                           <img className='similar-photo' src={similarPhoto.src} />
                         </div>
                       )}
+                    </FormGroup>
+                    <FormGroup>
+                      <ControlLabel>Price Range (US): { price && `$${price}` || ``}</ControlLabel>
+                      <input type='range' name='price'
+                        onChange={this.onPriceRangeChange}
+                        min='40' max='500'
+                      />
                     </FormGroup>
                   </div>
                 )}
