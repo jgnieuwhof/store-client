@@ -177,7 +177,7 @@ class Contact extends Component {
                       <div>
                         <FormGroup>
                           <ControlLabel>Ring Size (US)</ControlLabel>
-                          <FormControl componentClass='select'>
+                          <FormControl name='ringSize' componentClass='select'>
                             { [...Array(17)].map((_a, i, _b, j = (i / 2) + 4) => (
                               <option key={i} value={j}>{j}</option>
                             ))}
@@ -187,7 +187,9 @@ class Contact extends Component {
                           <ControlLabel>Style</ControlLabel>
                           <div>
                             { [`Single Stone`, `Multiple Stone`].map((x, i) => (
-                              <Radio key={x} name='ringStyle' inline
+                              <Radio key={x} inline
+                                name='ringStyle'
+                                value={x}
                                 defaultChecked={!i}
                               >{x}</Radio>
                             ))}
