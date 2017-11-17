@@ -10,10 +10,11 @@ export const subFilters = {
 
 let matcher = ({ option, value }) => {
   if (!value) return false
-  let parts = option.replace(`+`, ``).split(`-`)
-  if (parts.length === 2) {
+  if (option.includes(`-`) || option.slice(-1) === `+`) {
+    let parts = option.replace(`+`, ``).split(`-`)
     let x = parseFloat(value)
-    return x >= +parts[0] && x < (+parts[1] + 1)
+    let min = +parts[0], max = +parts[1]
+    return (!min || x >= min) && (!max || x < (max + 1))
   }
   return true
 }

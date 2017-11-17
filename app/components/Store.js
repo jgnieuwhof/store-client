@@ -117,7 +117,7 @@ class Store extends Component {
   render = () => {
     let { products, types, loaded } = this.state
     let { currentFilter, currentSubFilter } = this.props
-    let loading = products.length === 0 && Object.values(loaded).every(l => !l)
+    let loading = products.length === 0
     let filteredProducts = applyFilters({
       products, loaded, currentFilter, currentSubFilter,
     })
