@@ -12,14 +12,14 @@
       @media (max-width: $screen-xs-max) {
         text-align: center;
       }
-      button {
+      .filter-container {
         &:last-child {
           float: right;
           @media (max-width: $screen-xs-max) {
             float: none !important;
           }
         }
-        &.active {
+        button.active {
           text-shadow: 0px 0px 1px $gray-dark;
         }
       }

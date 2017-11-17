@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { Button, Col, Row } from 'react-bootstrap'
+import { Button, Col, DropdownButton, MenuItem, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
@@ -8,39 +8,67 @@ import BoloText from './BoloText'
 import Loading from './Loading'
 import ProductThumbnail from './ProductThumbnail'
 import StoreCarousel from './StoreCarousel'
+import { applyFilters, subFilters } from '../helpers/store'
 import { productArray } from '../helpers/product'
 import { setFilter } from '../reducers/reduceShop'
 
-const Filter = connect()(({ children, dispatch, filter, current }) => (
-  <Button
-    className={`naked ${filter === current ? `active` : ``}`}
-    onClick={() => dispatch(setFilter({ filter }))}
-  >
-    { children }
-  </Button>
-))
+const Filter = connect()(({ children, dispatch, filter, current, currentSub }) => {
+  let subs = filter && subFilters[filter.toLowerCase()]
+  let className = `naked ${filter === current ? `active` : ``}`
+  let setSub = ({ name, option }) => dispatch(setFilter({ filter, subFilter: { name, option } }))
+  return (
+    <span className='filter-container'>
+      { subs ? (
+        <DropdownButton id={filter} title={filter} className={className}>
+          <MenuItem eventKey='0'
+            onClick={() => dispatch(setFilter({ filter }))}
+          >
+            All
+          </MenuItem>
+          { subs.map(({ name, options }) => ([
+            <MenuItem key={name} header>{name}</MenuItem>,
+            options.map((x, i) => (
+              <MenuItem key={i} eventKey={i}
+                className={currentSub && currentSub.option === x ? `active` : ``}
+                onClick={() => { setSub({ name: name.toLowerCase(), option: x })}}
+              >
+                {x}
+              </MenuItem>
+            )),
+          ]))}
+        </DropdownButton>
+      ) : (
+        <Button className={className}
+          onClick={() => dispatch(setFilter({ filter }))}
+        >
+          { children }
+        </Button>
+      )}
+    </span>
+  )
+})
 
-const Filters = ({ types, current }) => (
+const Filters = ({ types, current, currentSub }) => (
   <div className='filters top-buffer bordered'>
     <Row>
       <Col xs={12}>
         <Filter filter={null} current={current}>All</Filter>
         <Filter filter='new' current={current}>New Arrivals</Filter>
-        { types.map(filter => (
-          <Filter
-            key={filter}
-            filter={filter}
-            current={current}
+        { types.sort().map(filter => (
+          <Filter key={filter} filter={filter}
+            current={current} currentSub={currentSub}
           >
-            { filter }
+            {filter}
           </Filter>
         ))}
-        <Button
-          className='naked'
-          onClick={() => { browserHistory.push(`/contact/customOrderRequest`) }}
-        >
-          Request Custom Order
-        </Button>
+        <span className='filter-container'>
+          <Button
+            className='naked'
+            onClick={() => { browserHistory.push(`/contact/customOrderRequest`) }}
+          >
+            Request Custom Order
+          </Button>
+        </span>
       </Col>
     </Row>
   </div>
@@ -88,17 +116,11 @@ class Store extends Component {
 
   render = () => {
     let { products, types, loaded } = this.state
-    let { currentFilter } = this.props
+    let { currentFilter, currentSubFilter } = this.props
     let loading = products.length === 0 && Object.values(loaded).every(l => !l)
-    let today = new Date()
-    let newCutoff = today.setMonth(today.getMonth() - 2)
-    let filteredProducts = products.filter(p => (
-      loaded[p.id] &&
-        (!currentFilter ||
-          p.type === currentFilter ||
-          (currentFilter === `new` && p.createdAt > newCutoff)
-        )
-    ))
+    let filteredProducts = applyFilters({
+      products, loaded, currentFilter, currentSubFilter,
+    })
     return (
       <div className='store-container fadein'>
         <h1 className='text-center hidden-xs hidden-sm'>
@@ -111,11 +133,17 @@ class Store extends Component {
           }
           { !loading &&
             <div>
-              <Filters types={types} current={currentFilter} />
+              <Filters types={types} current={currentFilter} currentSub={currentSubFilter} />
               <Row>
-                { filteredProducts.map(product => (
-                  <ProductThumbnail key={product.id} product={product} />
-                )) }
+                { filteredProducts && filteredProducts.length ? (
+                  filteredProducts.map(product => (
+                    <ProductThumbnail key={product.id} product={product} />
+                  ))
+                ) : (
+                  <p className='top-buffer text-center'>
+                    There's nothing here, please try another selection
+                  </p>
+                )}
               </Row>
             </div>
           }
@@ -128,4 +156,5 @@ class Store extends Component {
 export default connect(state => ({
   products: state.shop.products,
   currentFilter: state.shop.filter,
+  currentSubFilter: state.shop.subFilter,
 }))(Store)

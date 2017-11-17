@@ -27,9 +27,9 @@ export const fetchProducts = () => {
   }
 }
 
-export const setFilter = ({ filter }) => {
+export const setFilter = ({ filter, subFilter }) => {
   return async dispatch => {
-    dispatch({ type: shop.SET_FILTER, filter })
+    dispatch({ type: shop.SET_FILTER, filter, subFilter })
   }
 }
 
@@ -68,7 +68,7 @@ export default function (state = defaultState, action) {
 
   // ------------------------------------------------------------------------
   case shop.SET_FILTER:
-    update = { filter: action.filter }
+    update = { filter: action.filter, subFilter: action.subFilter }
     break
   }
 
