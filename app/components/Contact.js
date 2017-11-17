@@ -223,7 +223,9 @@ class Contact extends Component {
                       )}
                     </FormGroup>
                     <FormGroup>
-                      <ControlLabel>Price Range (US): { price && `$${price}` || ``}</ControlLabel>
+                      <ControlLabel>
+                        Price Range (US): { ` $${price || 50}` }
+                      </ControlLabel>
                       <input type='range' name='price'
                         onChange={this.onPriceRangeChange}
                         min='40' max='500'
