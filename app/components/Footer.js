@@ -3,6 +3,11 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router'
 
 import JoinNewsletter from './JoinNewsletter'
+import SocialIcons from './SocialIcons'
+
+const FooterLink = ({ to, label }) => (
+  <p><Link to={to}>{label}</Link></p>
+)
 
 export default () => {
   return (
@@ -10,19 +15,20 @@ export default () => {
       <Grid>
         <Row>
           <Col xs={6} sm={3}>
-            <p><Link to='/about'>About</Link></p>
-            <p><Link to='/contact/customOrderRequest'>Request Custom Order</Link></p>
-            <p><Link to='/events'>Upcoming Events</Link></p>
+            <FooterLink to='/about' label='About' />
+            <FooterLink to='/contact/customOrderRequest' label='Request Custom Order' />
+            <FooterLink to='/events' label='Upcoming Events' />
           </Col>
           <Col xs={6} sm={3} style={{ marginBottom: 20 }}>
-            <p><Link to='/help'>Need Help?</Link></p>
-            <p><Link to='/shipping'>Shipping Information</Link></p>
-            <p><Link to='/returns'>Returns / Exchanges</Link></p>
-            <p><Link to='/international'>International Orders</Link></p>
-            <p><Link to='/faq'>FAQ</Link></p>
+            <FooterLink to='/help' label='Need Help?' />
+            <FooterLink to='/shipping' label='Shipping Information' />
+            <FooterLink to='/returns' label='Returns / Exchanges' />
+            <FooterLink to='/international' label='International Orders' />
+            <FooterLink to='/faq' label='FAQ' />
           </Col>
           <Col xs={12} sm={6}>
             <JoinNewsletter />
+            <SocialIcons />
           </Col>
         </Row>
       </Grid>

@@ -79,6 +79,7 @@ $icon-font-path: "./../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 
 // Everything else second
 @import './styles/layout.scss';
+@import './styles/footer.scss';
 @import './styles/store.scss';
 @import './styles/cart.scss';
 @import './styles/hover.scss';
@@ -90,3 +91,4 @@ $icon-font-path: "./../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 @import './styles/header.scss';
 @import './styles/signup.scss';
 @import './styles/form.scss';
+@import './styles/socialIcons.scss';
