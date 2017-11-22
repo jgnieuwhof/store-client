@@ -114,6 +114,11 @@ class Store extends Component {
     this.updateProducts(nextProps)
   }
 
+  componentWillUnmount = () => {
+    let { products } = this.props
+    productArray(products).forEach(x => x.images[0].onload = null)
+  }
+
   render = () => {
     let { products, types, loaded } = this.state
     let { currentFilter, currentSubFilter } = this.props
