@@ -21,14 +21,20 @@
   }
   .description {
     font-size: 18px;
-    overflow: scroll;
-    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 400px;
+    @media (max-width: $screen-sm-max) {
+      max-height: 200px;
+      padding-top: 20px;
+    }
   }
   .price {
     color: $brand-secondary;
-    text-align: center;
-    @media (min-width: $screen-sm-min) {
-      text-align: right;
+    font-size: 21px;
+    text-align: right;
+    @media (max-width: $screen-sm-max) {
+      text-align: center;
     }
   }
   .carousel-indicators {

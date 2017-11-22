@@ -10,9 +10,7 @@ import { addVariantToCart } from '../reducers/reduceCart'
 import { fetchProduct } from '../reducers/reduceShop'
 
 let Price = ({ price }) => (
-  <p className='price'>
-    <strong>Price: {price}</strong>
-  </p>
+  <p className='price'>Price: {price}</p>
 )
 
 class ProductDetail extends Component {
