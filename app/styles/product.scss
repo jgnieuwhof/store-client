@@ -23,8 +23,9 @@
     font-size: 18px;
     overflow-y: scroll;
     overflow-x: hidden;
-    max-height: 400px;
+    height: 400px;
     @media (max-width: $screen-sm-max) {
+      height: auto;
       max-height: 200px;
       padding-top: 20px;
     }
@@ -46,5 +47,11 @@
   }
   .carousel-inner, .carousel-control {
     background: transparent;
+  }
+  .social-icon-container {
+    .social-icon {
+      width: 30px !important;
+      height: 30px !important;
+    }
   }
 }

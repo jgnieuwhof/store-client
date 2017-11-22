@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import CallToAction from './CallToAction'
 import Loading from './Loading'
 import PageHeader from './PageHeader'
+import SocialIcons from './SocialIcons'
+
 import { addVariantToCart } from '../reducers/reduceCart'
 import { fetchProduct } from '../reducers/reduceShop'
 
@@ -117,7 +119,8 @@ class ProductDetail extends Component {
             </Row>
             <div className='top-buffer'>
               <CallToAction large
-                customContent={<Price price={product.variant.formattedPrice} />}
+                customContentLeft={<SocialIcons dark />}
+                customContentRight={<Price price={product.variant.formattedPrice} />}
                 onClick={() => {this.addProductToCartHandler(add)}}
                 disabled={disabled}
                 title={actionText}

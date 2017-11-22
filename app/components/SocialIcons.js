@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { SocialIcon } from 'react-social-icons'
+import { SocialIcons } from 'react-social-icons'
 
 const urls = [
   `https://www.instagram.com/rambleonsilver/`,
@@ -9,11 +9,8 @@ const urls = [
   `mailto:rambleonsilverco@gmail.com`,
 ]
 
-export default ({}) => (
+export default ({ dark }) => (
   <div className='social-icon-container'>
-    { urls.map(x => (
-      <SocialIcon key={x} url={x} />
-    ))
-    }
+    <SocialIcons urls={urls} color={ dark ? `black` : `white` } />
   </div>
 )
