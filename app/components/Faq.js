@@ -12,7 +12,7 @@ const faqs = [
 ]
 
 export default () => (
-  <Page title="Shipping" className={`shipping-container`} center>
+  <Page title="FAQ" center>
     { faqs.map((x, i) => (
       <Section key={i} title={`${i + 1}. ${x[0]}`}>
         { x[1] }
@@ -20,7 +20,7 @@ export default () => (
     ))}
     <Section>
       For any other inquiries not addressed in this FAQ,
-      please email us at <a href='mailto:info@rambleonsilver.com'>info@rambleonsilver.com</a>
+      please email us at <a href='mailto:rambleonsilver@gmail.com'>rambleonsilver@gmail.com</a>
     </Section>
   </Page>
 )

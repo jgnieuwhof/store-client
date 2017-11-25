@@ -10,6 +10,7 @@ import Contact from './Contact'
 import Error404 from './Error404'
 import Faq from './Faq'
 import ProductDetail from './ProductDetail'
+import Returns from './Returns'
 import Shipping from './Shipping'
 import Signup from './Signup'
 import Site from './Site'
@@ -38,6 +39,7 @@ const Other = () => (
       <Route path="about" component={About} />
       <Route path="shipping" component={Shipping} />
       <Route path="faq" component={Faq} />
+      <Route path="returns" component={Returns} />
 
     </Route>
     <Route path="*" component={Error404} />
