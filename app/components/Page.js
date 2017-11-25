@@ -4,7 +4,16 @@ import { Col, Row } from 'react-bootstrap'
 
 import BoloText from './BoloText'
 
-export const BodyImg = ({ src }) => (
+export const Section = ({ title, children }) => (
+  <div className='page-section'>
+    { title && <h4><strong>{ title }</strong></h4> }
+    <p>
+      { children }
+    </p>
+  </div>
+)
+
+export const PageImage = ({ src }) => (
   <Row>
     <Col sm={8} smOffset={2}>
       <img src={src} className='img-responsive' />
@@ -12,8 +21,8 @@ export const BodyImg = ({ src }) => (
   </Row>
 )
 
-export default ({ className, title, children }) => (
-  <div className={`page-container ${className}`}>
+export default ({ className, title, children, center }) => (
+  <div className={`page-container ${className} ${center ? `text-center` : ``}`}>
     <h2>
       <BoloText boloClass='hidden-xs'>{ title }</BoloText>
     </h2>
