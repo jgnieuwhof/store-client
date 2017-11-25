@@ -15,6 +15,7 @@ import Shipping from './Shipping'
 import Signup from './Signup'
 import Site from './Site'
 import Splash from './Splash'
+import Stockists from './Stockists'
 import Store from './Store'
 import UpcomingEvents from './UpcomingEvents'
 
@@ -44,6 +45,7 @@ const Other = () => (
       <Route path="faq" component={Faq} />
       <Route path="returns" component={Returns} />
       <Route path="events" component={UpcomingEvents} />
+      <Route path="stockists" component={Stockists} />
 
     </Route>
     <Route path="*" component={Error404} />

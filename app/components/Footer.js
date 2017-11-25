@@ -20,11 +20,10 @@ export default () => {
             <FooterLink to='/events' label='Upcoming Events' />
           </Col>
           <Col xs={6} sm={3} style={{ marginBottom: 20 }}>
-            <FooterLink to='/help' label='Need Help?' />
             <FooterLink to='/shipping' label='Shipping Information' />
             <FooterLink to='/returns' label='Returns / Exchanges' />
-            <FooterLink to='/international' label='International Orders' />
             <FooterLink to='/faq' label='FAQ' />
+            <FooterLink to='/stockists' label='Stockists' />
           </Col>
           <Col xs={12} sm={6}>
             <JoinNewsletter />
