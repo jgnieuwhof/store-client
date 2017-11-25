@@ -93,8 +93,10 @@ $xs-footer-height: 480px;
 .app-container {
   position: relative;
   background: white;
-  min-height: 100vh;
   padding-bottom: $footer-height;
+  @media(min-width: $screen-xs-min) {
+    min-height: 100vh;
+  }
   @media(max-width: $screen-xs-max) {
     padding-bottom: $xs-footer-height;
   }
