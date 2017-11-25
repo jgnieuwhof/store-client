@@ -13,7 +13,7 @@ export const Section = ({ title, children }) => (
   </div>
 )
 
-export const PageImage = ({ src }) => (
+export const Image = ({ src }) => (
   <Row>
     <Col sm={8} smOffset={2}>
       <img src={src} className='img-responsive' />
