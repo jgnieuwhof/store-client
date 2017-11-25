@@ -74,7 +74,7 @@ class ProductDetail extends Component {
           <Col sm={6}>
             <Row className='feature-image center-content'>
               <img
-                style={{ height: 400 }}
+                style={{ maxHeight: 400 }}
                 className='img-responsive'
                 src={ featureImage || product.images[0].src }
               />
