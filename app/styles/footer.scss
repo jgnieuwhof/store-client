@@ -20,7 +20,7 @@
   .email-form-container{
     text-align: right;
     @media(max-width: $screen-xs-max) {
-      text-align: left;
+      text-align: center;
       .email-form button {
         margin-top: 15px;
       }
@@ -31,7 +31,8 @@
     float: right;
     padding-top: 15px;
     @media(max-width: $screen-xs-max) {
-
+      float: none;
+      text-align: center;
     }
   }
 }
