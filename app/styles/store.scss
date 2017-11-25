@@ -1,7 +1,7 @@
 
 .store-container {
   h1 {
-    margin: 20px 0;
+    margin: 40px 0;
   }
   .store-items {
     position: relative;
@@ -20,7 +20,7 @@
           }
         }
         button.active {
-          text-shadow: 0px 0px 1px $gray-dark;
+          text-shadow: 1px 0px 0px $gray-dark;
         }
       }
     }
