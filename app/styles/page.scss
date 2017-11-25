@@ -12,9 +12,6 @@
     margin: 0 auto;
     max-width: $screen-sm-min;
 
-    a {
-      text-decoration: underline;
-    }
     p {
       margin-bottom: 30px;
     }
@@ -22,6 +19,13 @@
       margin-top: 15px;
     }
   }
+
+  .page-section {
+    a {
+      text-decoration: underline;
+    }
+  }
+
   &.text-center {
     * { text-align: center; }
   }

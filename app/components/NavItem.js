@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 const NavLink = (props, context) => {
   let { router } = context
   let { href, className, children } = props
-  let isActive = href && router.isActive(href, true)
+  let isActive = href && router.isActive(href)
   let klassName = className || ``
   return (
     <li className={isActive ? `${klassName} active` : klassName}>

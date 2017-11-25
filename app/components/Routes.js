@@ -16,6 +16,7 @@ import Signup from './Signup'
 import Site from './Site'
 import Splash from './Splash'
 import Store from './Store'
+import UpcomingEvents from './UpcomingEvents'
 
 const mode = `${process.env.MODE}`
 
@@ -32,7 +33,9 @@ const Other = () => (
     <Route path="/" component={App}>
       <Route path="store" component={Store} maximize />
       <Route path="product/:id" component={ProductDetail} />
-      <Route path="contact(/:reason)" component={Contact} />
+      <Route path="contact" component={Contact}>
+        <Route path=":reason" />
+      </Route>
       <Route path="cart" component={Cart} />
       <Route path="signup" component={Signup} />
 
@@ -40,6 +43,7 @@ const Other = () => (
       <Route path="shipping" component={Shipping} />
       <Route path="faq" component={Faq} />
       <Route path="returns" component={Returns} />
+      <Route path="events" component={UpcomingEvents} />
 
     </Route>
     <Route path="*" component={Error404} />
