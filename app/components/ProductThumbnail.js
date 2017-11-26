@@ -3,7 +3,9 @@ import React from 'react'
 import { Col, Thumbnail } from 'react-bootstrap'
 import { browserHistory } from 'react-router'
 
-const ProductThumbnail = ({ product }) => {
+import placeholder from '../img/loadingEllipsisSmall.png'
+
+const ProductThumbnail = ({ product, isLoaded }) => {
   let soldOut = !product.variant.available
   let titleClass = `${soldOut ? `sold-out` : ``}`
   return (
@@ -15,13 +17,15 @@ const ProductThumbnail = ({ product }) => {
       <Thumbnail
         className='store-thumbnail'
         onClick={() => { browserHistory.push(`/product/${product.id}`) }}
-        src={product.images[0].src}
+        src={isLoaded ? product.images[0].src : placeholder}
       >
-        <span className={`title text-center showguide ${titleClass}`}>
-          <h2 style={{ margin: 0 }}>
-            <span>{ soldOut ? `SOLD OUT` : product.title }</span>
-          </h2>
-        </span>
+        { isLoaded && (
+          <span className={`title text-center showguide ${titleClass}`}>
+            <h2 style={{ margin: 0 }}>
+              <span>{ soldOut ? `SOLD OUT` : product.title }</span>
+            </h2>
+          </span>
+        )}
       </Thumbnail>
     </Col>
   )

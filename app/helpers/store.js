@@ -21,16 +21,14 @@ let matcher = ({ option, value }) => {
 
 let truthy = x => !!x
 
-export let applyFilters = ({ products, loaded, currentFilter, currentSubFilter: sub }) => (
+export let applyFilters = ({ products, currentFilter, currentSubFilter: sub }) => (
   products.filter(p => (
-    [ loaded[p.id],
+    [
       [ !currentFilter,
         p.type === currentFilter,
         currentFilter === `new` && p.createdAt > newCutoff,
       ].some(truthy),
-      [ !sub,
-        sub && matcher({ option: sub.option, value: p[sub.name] }),
-      ].some(truthy),
+      !sub || matcher({ option: sub.option, value: p[sub.name] }),
     ].every(truthy)
   ))
 )

@@ -124,7 +124,7 @@ class Store extends Component {
     let { currentFilter, currentSubFilter } = this.props
     let loading = products.length === 0
     let filteredProducts = applyFilters({
-      products, loaded, currentFilter, currentSubFilter,
+      products, currentFilter, currentSubFilter,
     })
     return (
       <div className='store-container fadein'>
@@ -141,8 +141,8 @@ class Store extends Component {
               <Filters types={types} current={currentFilter} currentSub={currentSubFilter} />
               <Row>
                 { filteredProducts && filteredProducts.length ? (
-                  filteredProducts.map(product => (
-                    <ProductThumbnail key={product.id} product={product} />
+                  filteredProducts.map(x => (
+                    <ProductThumbnail key={x.id} product={x} isLoaded={loaded[x.id]} />
                   ))
                 ) : (
                   <p className='top-buffer text-center'>
