@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { Button, Col, DropdownButton, MenuItem, Row } from 'react-bootstrap'
+import { Button, Col, DropdownButton, MenuItem, Pagination, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
@@ -79,6 +79,8 @@ class Store extends Component {
     loaded: {},
     products: [],
     types: [],
+    page: 1,
+    pageSize: 12,
   }
 
   updateProducts = ({ products: productHash }) => {
@@ -119,13 +121,18 @@ class Store extends Component {
     productArray(products).forEach(x => x.images[0].onload = null)
   }
 
+  setPage = page => this.setState({ page })
+
   render = () => {
-    let { products, types, loaded } = this.state
+    let { loaded, page, pageSize, products, types } = this.state
     let { currentFilter, currentSubFilter } = this.props
     let loading = products.length === 0
     let filteredProducts = applyFilters({
       products, currentFilter, currentSubFilter,
     })
+    let paginatedProducts = filteredProducts.
+      slice((page - 1) * pageSize, page * pageSize)
+    console.log(products.length / pageSize)
     return (
       <div className='store-container fadein'>
         <h1 className='text-center hidden-xs hidden-sm'>
@@ -140,8 +147,8 @@ class Store extends Component {
             <div>
               <Filters types={types} current={currentFilter} currentSub={currentSubFilter} />
               <Row>
-                { filteredProducts && filteredProducts.length ? (
-                  filteredProducts.map(x => (
+                { paginatedProducts && paginatedProducts.length ? (
+                  paginatedProducts.map(x => (
                     <ProductThumbnail key={x.id} product={x} isLoaded={loaded[x.id]} />
                   ))
                 ) : (
@@ -149,6 +156,16 @@ class Store extends Component {
                     There's nothing here, please try another selection
                   </p>
                 )}
+              </Row>
+              <Row className='text-center'>
+                <Pagination
+                  prev next first last
+                  ellipsis boundaryLinks
+                  maxButtons={5}
+                  items={Math.round(filteredProducts.length / pageSize)}
+                  activePage={page}
+                  onSelect={this.setPage}
+                />
               </Row>
             </div>
           }
