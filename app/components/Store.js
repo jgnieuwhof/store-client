@@ -162,7 +162,7 @@ class Store extends Component {
                   prev next first last
                   ellipsis boundaryLinks
                   maxButtons={5}
-                  items={Math.round(filteredProducts.length / pageSize)}
+                  items={Math.ceil(filteredProducts.length / pageSize)}
                   activePage={page}
                   onSelect={this.setPage}
                 />
