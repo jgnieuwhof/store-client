@@ -8,7 +8,7 @@ let Site = ({ canTouch, children }) => {
   let faviconConfig = [{
     rel: `icon`,
     href: favicon,
-    type: `img/ico`,
+    type: `img/png`,
   }]
   let withHover = canTouch ? `` : `with-hover`
   return (

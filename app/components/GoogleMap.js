@@ -3,7 +3,14 @@ import React, { Component } from 'react'
 import { compose, withProps } from 'recompose'
 import { withGoogleMap, withScriptjs, GoogleMap, InfoWindow, Marker } from 'react-google-maps'
 
-const url = `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`
+import { googleMaps as key } from '../app.config'
+import { isDevelopment } from '../helpers/app'
+
+const url = [
+  `https://maps.googleapis.com/maps/api/js`,
+  `?v=3.exp&libraries=geometry,drawing,places`,
+  isDevelopment ? `` : `&key=${key}`,
+].join(``)
 
 class MyGoogleMap extends Component {
   state = { selectedMarker: null }

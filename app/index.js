@@ -11,14 +11,14 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import ShopifyBuy from 'shopify-buy'
 
-import appConfig from './app.config'
+import { shopify as shopifyConfig } from './app.config'
 import { logPageView } from './helpers/analytics'
 import Routes from './components/Routes'
 import ShopifyProvider from './components/ShopifyProvider'
 import finalReducer from './reducers/reduce'
 
 const SHOPIFY = {
-  client: ShopifyBuy.buildClient(appConfig.shopify),
+  client: ShopifyBuy.buildClient(shopifyConfig),
   cart: {},
 }
 
