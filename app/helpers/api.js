@@ -1,10 +1,12 @@
 
+import { apiUrl } from '../app.config'
+
 export default async (endpoint, body) => {
   let json
   try {
     let isFormData = body instanceof FormData
     let response = await fetch(
-      `${process.env.API_URL}/api/${endpoint}`,
+      `${apiUrl}/api/${endpoint}`,
       {
         headers: isFormData ? {} : {
           'Accept': `application/json`,

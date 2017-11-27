@@ -2,6 +2,8 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
+import { mode } from '../app.config'
+
 import About from './About'
 import App from './App'
 import Cart from './Cart'
@@ -18,8 +20,6 @@ import Splash from './Splash'
 import Stockists from './Stockists'
 import Store from './Store'
 import UpcomingEvents from './UpcomingEvents'
-
-const mode = `${process.env.MODE}`
 
 const Maintenance = () => (
   <Route path="/" component={Site}>
