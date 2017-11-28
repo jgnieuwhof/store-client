@@ -3,6 +3,11 @@
   h1 {
     margin: 40px 0;
   }
+
+  .carousel-control.left, .carousel-control.right {
+    background-image: none
+  }
+
   .store-items {
     position: relative;
     min-height: 200px;

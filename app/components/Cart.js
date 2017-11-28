@@ -9,6 +9,11 @@ import PageHeader from './PageHeader'
 import { removeItemFromCart } from '../reducers/reduceCart'
 
 class Cart extends Component {
+  headToStoreIfNoItems = () => {
+    if (this.props.cart.lineItems.length === 0)
+      browserHistory.push(`/store`)
+  }
+
   checkout = () => {
     window.location.href = this.props.cart.checkoutUrl
   }
@@ -20,8 +25,7 @@ class Cart extends Component {
   removeItem = async (listItemId) => {
     let { dispatch } = this.props
     await dispatch(removeItemFromCart({ id: listItemId }))
-    if (this.props.cart.lineItems.length === 0)
-      browserHistory.push(`/store`)
+    this.headToStoreIfNoItems()
   }
 
   render = () => {
@@ -31,7 +35,11 @@ class Cart extends Component {
     return (
       <div className='cart'>
         <PageHeader title='My Cart' />
-        { !hasLineItems && <div>There's nothing here!</div>}
+        { !hasLineItems && (
+          <div className="text-center top-buffer">
+            There doesn't seem to be anything here. Click "store" below to go back.
+          </div>
+        )}
         { hasLineItems && (
           <div>
             <div className='line-items top-buffer'>

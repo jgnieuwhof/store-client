@@ -1,78 +1,17 @@
 
 import React, { Component } from 'react'
-import { Button, Col, DropdownButton, MenuItem, Pagination, Row } from 'react-bootstrap'
+import { Pagination, Row } from 'react-bootstrap'
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 
-import BoloText from './BoloText'
+import StoreFilters from './StoreFilters'
 import Loading from './Loading'
 import ProductThumbnail from './ProductThumbnail'
 import StoreCarousel from './StoreCarousel'
-import { applyFilters, subFilters } from '../helpers/store'
+
+import { getPosition } from '../helpers/dom'
+import { applyFilters } from '../helpers/store'
 import { productArray } from '../helpers/product'
-import { setFilter } from '../reducers/reduceShop'
-
-const Filter = connect()(({ children, dispatch, filter, current, currentSub }) => {
-  let subs = filter && subFilters[filter.toLowerCase()]
-  let className = `naked ${filter === current ? `active` : ``}`
-  let setSub = ({ name, option }) => dispatch(setFilter({ filter, subFilter: { name, option } }))
-  return (
-    <span className='filter-container'>
-      { subs ? (
-        <DropdownButton id={filter} title={filter} className={className}>
-          <MenuItem eventKey='0'
-            onClick={() => dispatch(setFilter({ filter }))}
-          >
-            All
-          </MenuItem>
-          { subs.map(({ name, options }) => ([
-            <MenuItem key={name} header>{name}</MenuItem>,
-            options.map((x, i) => (
-              <MenuItem key={i} eventKey={i}
-                className={currentSub && currentSub.option === x ? `active` : ``}
-                onClick={() => { setSub({ name: name.toLowerCase(), option: x })}}
-              >
-                {x}
-              </MenuItem>
-            )),
-          ]))}
-        </DropdownButton>
-      ) : (
-        <Button className={className}
-          onClick={() => dispatch(setFilter({ filter }))}
-        >
-          { children }
-        </Button>
-      )}
-    </span>
-  )
-})
-
-const Filters = ({ types, current, currentSub }) => (
-  <div className='filters top-buffer bordered'>
-    <Row>
-      <Col xs={12}>
-        <Filter filter={null} current={current}>All</Filter>
-        <Filter filter='new' current={current}>New Arrivals</Filter>
-        { types.sort().map(filter => (
-          <Filter key={filter} filter={filter}
-            current={current} currentSub={currentSub}
-          >
-            {filter}
-          </Filter>
-        ))}
-        <span className='filter-container'>
-          <Button
-            className='naked'
-            onClick={() => { browserHistory.push(`/contact/customOrderRequest`) }}
-          >
-            Request Custom Order
-          </Button>
-        </span>
-      </Col>
-    </Row>
-  </div>
-)
 
 class Store extends Component {
   state = {
@@ -121,31 +60,41 @@ class Store extends Component {
     productArray(products).forEach(x => x.images[0].onload = null)
   }
 
-  setPage = page => this.setState({ page })
+  scrollToFilters = () => {
+    let filters = ReactDOM.findDOMNode(this.filters)
+    let { y } = getPosition(filters)
+    window.scrollTo(0, window.scrollY + y - filters.offsetHeight)
+  }
+
+  setPage = (page) => {
+    this.scrollToFilters()
+    this.setState({ page })
+  }
 
   render = () => {
     let { loaded, page, pageSize, products, types } = this.state
     let { currentFilter, currentSubFilter } = this.props
     let loading = products.length === 0
-    let filteredProducts = applyFilters({
-      products, currentFilter, currentSubFilter,
-    })
+    let filteredProducts = applyFilters({ products, currentFilter, currentSubFilter })
     let paginatedProducts = filteredProducts.
       slice((page - 1) * pageSize, page * pageSize)
-    console.log(products.length / pageSize)
+    let numberOfPages = Math.ceil(filteredProducts.length / pageSize)
     return (
       <div className='store-container fadein'>
-        <h1 className='text-center hidden-xs hidden-sm'>
-          <BoloText>RAMBLE ON</BoloText>
-        </h1>
-        <StoreCarousel />
+        <StoreCarousel className='top-buffer' />
         <div className='store-items'>
           { loading &&
             <Loading size='5x' />
           }
           { !loading &&
             <div>
-              <Filters types={types} current={currentFilter} currentSub={currentSubFilter} />
+              <StoreFilters
+                types={types}
+                ref={x => this.filters = x}
+                current={currentFilter}
+                currentSub={currentSubFilter}
+                onChange={() => this.setPage(1)}
+              />
               <Row>
                 { paginatedProducts && paginatedProducts.length ? (
                   paginatedProducts.map(x => (
@@ -162,7 +111,7 @@ class Store extends Component {
                   prev next first last
                   ellipsis boundaryLinks
                   maxButtons={5}
-                  items={Math.ceil(filteredProducts.length / pageSize)}
+                  items={numberOfPages}
                   activePage={page}
                   onSelect={this.setPage}
                 />
