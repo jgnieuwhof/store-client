@@ -3,7 +3,7 @@ let today = new Date()
 const newCutoff = today.setMonth(today.getMonth() - 2)
 
 export const subFilters = {
-  ring: [
+  rings: [
     { name: `Size`, options: [`1-3`, `4-5`, `6-7`, `8-9`, `10+`] },
   ],
 }
