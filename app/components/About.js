@@ -8,9 +8,10 @@ export default () => (
   <Page title="About" center>
     <Section>
       Ramble On Silver Co is a one woman show based out of Toronto, Ontario.
-      Inspired by those sweet, sweet blues of turquoise, Ramble On Silver is
-      primarily centered around sterling silver and American Turquoise pieces.
-      All pieces are handcrafted using stones that have been personally selected and sterling silver
+      Inspired by the sweet, sweet blues of the turquoise stone, Ramble On Silver is
+      primarily centered around sterling silver and American turquoise pieces.
+      All pieces are handcrafted using sterling silver and stones that
+      have been personally selected.
     </Section>
     <Image src={about} />
   </Page>

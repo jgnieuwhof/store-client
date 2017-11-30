@@ -142,7 +142,7 @@ class Contact extends Component {
           <div>
             <div className='greeting'>
               <p>Want a custom piece? See something you like but it's not in your size?</p>
-              <p>Wanna chat? Fill out the form below and I'll get back to you</p>
+              <p>Want to chat? Fill out the form below and I'll get back to you</p>
               <p>about creating a custom piece</p>
             </div>
             <Col sm={8} smOffset={2}>
