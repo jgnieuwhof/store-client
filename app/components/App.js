@@ -8,10 +8,10 @@ import { setupCart } from '../reducers/reduceCart'
 import { fetchProducts } from '../reducers/reduceShop'
 
 class App extends Component {
-  componentWillMount = () => {
+  componentWillMount = async () => {
     let { dispatch } = this.props
+    await dispatch(fetchProducts())
     dispatch(setupCart())
-    dispatch(fetchProducts())
   }
 
   render = () => {

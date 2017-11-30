@@ -8,12 +8,15 @@ import { cart as cartActions } from '../actions'
 
 export const setupCart = () => {
   return async (dispatch, getState, { shopify }) => {
-    let cart
-    let { cart: { id } } = getState()
-    if (!id)
-      cart = await shopify.client.createCart()
-    else
-      cart = await shopify.client.fetchCart(id)
+    let { cart: { id }, shop: { products } } = getState()
+    let cart = id ?
+      await shopify.client.fetchCart(id) :
+      await shopify.client.createCart()
+    await Promise.all(
+      cart.lineItems.
+        filter(x => !products[x.product_id] || !products[x.product_id].available).
+        map(x => cart.removeLineItem(x.id))
+    )
     shopify.cart = cart
     dispatch({ type: cartActions.SET_ID, id: cart.id })
     dispatch(updateCart({ cart }))
