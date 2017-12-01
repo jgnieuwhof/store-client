@@ -6,11 +6,11 @@ import { browserHistory } from 'react-router'
 
 let CallToAction = ({
     large, className, onClick, disabled, title,
-    customContentRight, customContentLeft,
+    detailText, customContentLeft,
   }) => (
     <Row className={`action-buttons ${className || ``}`}>
       <Col xs={12} sm={large ? 6 : 3} smOffset={large ? 6 : 9}>
-        { customContentRight }
+        { detailText && <p className='detailText'>{ detailText }</p> }
         <Button block bsSize='large' bsStyle='primary' onClick={onClick} disabled={disabled}>
           {title}
         </Button>

@@ -185,4 +185,13 @@ button {
       position: absolute;
     }
   }
+
+  .detailText {
+    color: $brand-secondary;
+    font-size: 21px;
+    text-align: right;
+    @media (max-width: $screen-sm-max) {
+      text-align: center;
+    }
+  }
 }

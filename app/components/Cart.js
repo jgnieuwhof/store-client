@@ -30,7 +30,7 @@ class Cart extends Component {
 
   render = () => {
     let { cart } = this.props
-    let { lineItems } = cart
+    let { lineItems, subtotal } = cart
     let hasLineItems = lineItems && lineItems.length > 0
     return (
       <div className='cart'>
@@ -74,6 +74,7 @@ class Cart extends Component {
         <CallToAction
           className='top-buffer'
           onClick={this.checkout}
+          detailText={`Total: $${subtotal}`}
           disabled={!lineItems.length}
           title='CHECKOUT'
         />

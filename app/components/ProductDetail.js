@@ -11,10 +11,6 @@ import SocialIcons from './SocialIcons'
 import { addVariantToCart } from '../reducers/reduceCart'
 import { fetchProduct } from '../reducers/reduceShop'
 
-let Price = ({ price }) => (
-  <p className='price'>Price: {price}</p>
-)
-
 class ProductDetail extends Component {
   state = {
     featureImage: null,
@@ -120,7 +116,7 @@ class ProductDetail extends Component {
             <div className='top-buffer'>
               <CallToAction large
                 customContentLeft={<SocialIcons dark />}
-                customContentRight={<Price price={product.variant.formattedPrice} />}
+                detailText={`Price: ${product.variant.formattedPrice}`}
                 onClick={() => {this.addProductToCartHandler(add)}}
                 disabled={disabled}
                 title={actionText}
