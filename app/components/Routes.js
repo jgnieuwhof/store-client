@@ -14,7 +14,6 @@ import Faq from './Faq'
 import ProductDetail from './ProductDetail'
 import Returns from './Returns'
 import Shipping from './Shipping'
-import Signup from './Signup'
 import Site from './Site'
 import Splash from './Splash'
 import Stockists from './Stockists'
@@ -38,7 +37,6 @@ const Other = () => (
         <Route path=":reason" />
       </Route>
       <Route path="cart" component={Cart} />
-      <Route path="signup" component={Signup} />
 
       <Route path="about" component={About} />
       <Route path="shipping" component={Shipping} />

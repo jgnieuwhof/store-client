@@ -3,12 +3,12 @@ import { Link } from 'react-router'
 
 const NavLink = (props, context) => {
   let { router } = context
-  let { href, className, children } = props
+  let { href, className, children, onClick } = props
   let isActive = href && router.isActive(href)
   let klassName = className || ``
   return (
     <li className={isActive ? `${klassName} active` : klassName}>
-      <Link to={href}>
+      <Link to={href} onClick={onClick}>
         {children}
       </Link>
     </li>

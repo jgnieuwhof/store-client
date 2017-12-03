@@ -1,28 +1,26 @@
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Button, Form, FormControl, Popover } from 'react-bootstrap'
 
 import api from '../helpers/api'
-import { lsGet, lsSet } from '../helpers/localStorage'
+import { setEmail } from '../reducers/reduceApp'
 
 class JoinNewsletter extends Component {
   state = {
-    email: lsGet(`email`),
     message: null,
   }
 
   join = async e => {
     e.preventDefault()
-    let { elements } = e.target
-    let { value: email } = elements[`email`]
+    let { dispatch, onSuccess } = this.props
+    let { value: email } = e.target.elements[`email`]
     if (!email) return
     let { success, message } = await api(`joinNewsletter`, { email })
+    this.setState({ message })
     if (success) {
-      this.setState({ email, message })
-      lsSet(`email`, email)
-    }
-    else {
-      this.setState({ message })
+      dispatch(setEmail({ email }))
+      onSuccess()
     }
   }
 
@@ -31,11 +29,11 @@ class JoinNewsletter extends Component {
   }
 
   render = () => {
-    let { children, hideLabel } = this.props
-    let { email, message } = this.state
+    let { children, className, email, hideLabel } = this.props
+    let { message } = this.state
     let joined = !!email
     return (
-      <div className='email-form-container'>
+      <div className={`email-form-container ${className}`}>
         { joined && <strong>Subscribed to mailing list as {email}</strong> }
         { !joined &&
           <div>
@@ -59,4 +57,6 @@ class JoinNewsletter extends Component {
   }
 }
 
-export default JoinNewsletter
+export default connect(state => ({
+  email: state.app.email,
+}))(JoinNewsletter)

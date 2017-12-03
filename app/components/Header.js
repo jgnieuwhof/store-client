@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   Navbar,
   Nav,
@@ -9,10 +10,13 @@ import { Link } from 'react-router'
 import CartBadge from './CartBadge'
 import NavItem from './NavItem'
 
+import { modalOpen } from '../reducers/reduceModal'
+
 class Header extends Component {
   state = { expanded: false }
   setExpanded = expanded => this.setState({ expanded })
   closeNav = () => this.setState({ expanded: false })
+  signup = () => this.props.dispatch(modalOpen({ modalComponent: `JoinNewsletter` }))
   render() {
     return (
       <div className="header-container">
@@ -33,7 +37,7 @@ class Header extends Component {
               <NavItem eventKey={3} href="/contact">Contact</NavItem>
             </Nav>
             <Nav onClick={this.closeNav} pullRight>
-              <NavItem eventKey={4} href="/signup">Sign Up</NavItem>
+              <NavItem eventKey={4} onClick={this.signup}>Sign Up</NavItem>
               <NavItem eventKey={5} href="/cart">
                 <CartBadge />
               </NavItem>
@@ -45,4 +49,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default connect()(Header)

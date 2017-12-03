@@ -17,3 +17,18 @@ export const shop = namespace(
     `SET_PRODUCTS`,
   ],
 )
+
+export const app = namespace(
+  `app`,
+  [
+    `SET_EMAIL`,
+  ],
+)
+
+export const modal = namespace(
+  `modal`,
+  [
+    `OPEN`,
+    `CLOSE`,
+  ],
+)
