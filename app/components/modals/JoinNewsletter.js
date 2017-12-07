@@ -5,6 +5,8 @@ import { Modal } from 'react-bootstrap'
 import { default as JoinNewsletterForm } from '../JoinNewsletter'
 import { modalClose } from '../../reducers/reduceModal'
 
+import logo from '../../img/logo.png'
+
 class JoinNewsletter extends Component {
   state = {
     success: false,
@@ -16,8 +18,11 @@ class JoinNewsletter extends Component {
     return (
       <div className='login-modal-container'>
         <Modal show={show} onHide={this.closeModal}>
-          <Modal.Body className='text-center'>
+          <Modal.Header>
             <button type="button" className='close' onClick={this.closeModal}>&times;</button>
+            <img className='img' src={logo} />
+          </Modal.Header>
+          <Modal.Body className='text-center'>
             { email ? (
               <div>
                 <h4>{ success ? `Thanks, w` : `W` }e're so glad you're with us!</h4>
@@ -26,7 +31,6 @@ class JoinNewsletter extends Component {
               <div>
                 <h4>Want in on exclusive deals and offers?</h4>
                 <p>
-                  Be the first to know by joining our mailing list.
                   As a member you'll enjoy early access to sales, get insider information
                   on upcoming lines and products, and more.
                 </p>
